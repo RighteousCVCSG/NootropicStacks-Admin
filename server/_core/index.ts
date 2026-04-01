@@ -33,6 +33,15 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
+  // Force lowercase URLs for SEO consistency (redirect mixed-case paths)
+  app.use((req, res, next) => {
+    if (req.path !== req.path.toLowerCase() && req.method === "GET") {
+      const lowercaseUrl = req.path.toLowerCase() + (req.url.includes("?") ? "?" + req.url.split("?")[1] : "");
+      return res.redirect(301, lowercaseUrl);
+    }
+    next();
+  });
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // tRPC API

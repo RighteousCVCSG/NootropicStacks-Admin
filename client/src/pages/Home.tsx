@@ -62,12 +62,12 @@ export default function Home() {
               Science-backed nootropic stacking
             </Badge>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6">
-              Build Your
-              <span className="gradient-text text-glow block">Perfect Stack</span>
+              Build Your Perfect
+              <span className="gradient-text text-glow block">Nootropic Stack</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              The most comprehensive nootropic stack builder. Browse 24+ research-backed supplements,
-              build goal-optimized stacks, and discover the best products from trusted vendors.
+              The free nootropic stack builder for biohackers. Browse research-backed supplements,
+              build goal-optimized stacks with real-time synergy analysis, and discover trusted vendors.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="glow-green text-base px-8" asChild>
