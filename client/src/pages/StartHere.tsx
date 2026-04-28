@@ -3,6 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { trpc } from "@/lib/trpc";
+import { useQuickStack } from "@/contexts/QuickStackContext";
+import { toast } from "sonner";
 import {
   ShieldCheck,
   ArrowRight,
@@ -62,10 +64,18 @@ const STARTER_SUPPLEMENTS = [
   },
 ];
 
+const SLUG_NAMES: Record<string, string> = {
+  'l-theanine': 'L-Theanine',
+  'caffeine': 'Caffeine',
+  'ashwagandha': 'Ashwagandha',
+  'magnesium-glycinate': 'Magnesium Glycinate',
+};
+
 const BEGINNER_STACKS = [
   {
     name: "The Focus Starter",
     icon: <Brain className="w-4 h-4" />,
+    slugs: ['l-theanine', 'caffeine'],
     supplements: ["L-Theanine 200mg", "Caffeine 100mg"],
     description:
       "The most research-backed combination in nootropics. Add L-Theanine to your morning coffee and feel the difference within the first day.",
@@ -73,6 +83,7 @@ const BEGINNER_STACKS = [
   {
     name: "The Calm Focus",
     icon: <FlaskConical className="w-4 h-4" />,
+    slugs: ['l-theanine', 'ashwagandha'],
     supplements: ["L-Theanine 200mg", "Ashwagandha 300mg"],
     description:
       "Ideal if you have anxiety or high stress. Reduces cortisol during the day while maintaining clear-headed focus — no stimulants required.",
@@ -80,6 +91,7 @@ const BEGINNER_STACKS = [
   {
     name: "The Sleep + Recovery",
     icon: <Moon className="w-4 h-4" />,
+    slugs: ['magnesium-glycinate', 'ashwagandha'],
     supplements: ["Magnesium Glycinate 400mg", "Ashwagandha 300mg"],
     description:
       "Taken 30–60 minutes before bed. Dramatically improves deep sleep quality and morning recovery. Most beginners notice effects within the first week.",
@@ -106,6 +118,14 @@ const AVOID_LIST = [
 
 export default function StartHere() {
   const trackClick = trpc.affiliate.trackClick.useMutation();
+  const { addItem } = useQuickStack();
+
+  const loadStack = (stack: typeof BEGINNER_STACKS[number]) => {
+    stack.slugs.forEach((slug) => {
+      addItem({ slug, name: SLUG_NAMES[slug] ?? slug });
+    });
+    toast.success(`${stack.name} loaded! (${stack.slugs.length} supplements added)`);
+  };
 
   const handleBuy = (url: string, partner: string, supplement: string) => {
     window.open(url, "_blank");
@@ -287,11 +307,10 @@ export default function StartHere() {
                 <p className="text-xs text-muted-foreground leading-relaxed flex-1 mb-4">
                   {stack.description}
                 </p>
-                <Link href="/builder">
-                  <Button size="sm" variant="outline" className="w-full text-xs border-border/50 gap-1">
-                    Build This Stack <ArrowRight className="w-3 h-3" />
-                  </Button>
-                </Link>
+                <Button size="sm" variant="outline" className="w-full text-xs border-border/50 gap-1"
+                  onClick={() => loadStack(stack)}>
+                  Build This Stack <ArrowRight className="w-3 h-3" />
+                </Button>
               </div>
             ))}
           </div>

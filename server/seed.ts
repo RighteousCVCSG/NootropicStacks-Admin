@@ -15,11 +15,11 @@ const supplementData = [
     scoreEnergy: 4, scoreMood: 5, scoreMemory: 9, scoreFocus: 8, scoreCreativity: 6, scoreSleep: 2, scoreAnxiety: 2,
     affiliatePrimary: "https://nootropicsdepot.com/alpha-gpc-capsules/?rfsn=supplement-stacker", affiliatePrimaryLabel: "Nootropics Depot",
     affiliateSecondary: "https://www.iherb.com/c/alpha-gpc?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=alpha+gpc+supplement&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=alpha+gpc+supplement&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: true,
   },
   {
-    slug: "lions-mane-mushroom",
+    slug: "lions-mane",
     name: "Lion's Mane Mushroom",
     category: "Adaptogen",
     summary: "A medicinal mushroom that stimulates Nerve Growth Factor (NGF) production, supporting neuroplasticity, memory, and long-term brain health.",
@@ -28,11 +28,11 @@ const supplementData = [
     scoreEnergy: 3, scoreMood: 7, scoreMemory: 8, scoreFocus: 7, scoreCreativity: 8, scoreSleep: 4, scoreAnxiety: 6,
     affiliatePrimary: "https://neurohacker.com/shop/qualia-mushroom?rfsn=supplement-stacker", affiliatePrimaryLabel: "Neurohacker",
     affiliateSecondary: "https://us.foursigmatic.com/collections/lion-s-mane?aff=nootropicstacker", affiliateSecondaryLabel: "Four Sigmatic",
-    affiliateAmazon: "https://www.amazon.com/s?k=lions+mane+mushroom+supplement&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=lions+mane+mushroom+supplement&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: true,
   },
   {
-    slug: "bacopa-monnieri",
+    slug: "bacopa",
     name: "Bacopa Monnieri",
     category: "Adaptogen",
     summary: "An Ayurvedic herb that enhances memory consolidation and reduces anxiety through its active bacosides, with effects building over 4–8 weeks.",
@@ -41,7 +41,7 @@ const supplementData = [
     scoreEnergy: 2, scoreMood: 6, scoreMemory: 9, scoreFocus: 7, scoreCreativity: 5, scoreSleep: 5, scoreAnxiety: 7,
     affiliatePrimary: "https://nootropicsdepot.com/bacopa-monnieri-capsules/?rfsn=supplement-stacker", affiliatePrimaryLabel: "Nootropics Depot",
     affiliateSecondary: "https://www.iherb.com/c/bacopa?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=bacopa+monnieri+supplement&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=bacopa+monnieri+supplement&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: false,
   },
   {
@@ -54,7 +54,7 @@ const supplementData = [
     scoreEnergy: 3, scoreMood: 7, scoreMemory: 5, scoreFocus: 8, scoreCreativity: 6, scoreSleep: 6, scoreAnxiety: 9,
     affiliatePrimary: "https://nootropicsdepot.com/l-theanine-capsules/?rfsn=supplement-stacker", affiliatePrimaryLabel: "Nootropics Depot",
     affiliateSecondary: "https://www.iherb.com/c/l-theanine?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=l-theanine+supplement&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=l-theanine+supplement&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: true,
   },
   {
@@ -67,7 +67,7 @@ const supplementData = [
     scoreEnergy: 6, scoreMood: 6, scoreMemory: 9, scoreFocus: 9, scoreCreativity: 7, scoreSleep: 2, scoreAnxiety: 3,
     affiliatePrimary: "https://www.mindlabpro.com/?a_aid=nootropicstacker", affiliatePrimaryLabel: "Mind Lab Pro",
     affiliateSecondary: "https://nootropicsdepot.com/citicoline-capsules/?rfsn=supplement-stacker", affiliateSecondaryLabel: "Nootropics Depot",
-    affiliateAmazon: "https://www.amazon.com/s?k=citicoline+cdp-choline&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=citicoline+cdp-choline&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: true,
   },
   {
@@ -80,11 +80,11 @@ const supplementData = [
     scoreEnergy: 4, scoreMood: 6, scoreMemory: 8, scoreFocus: 7, scoreCreativity: 5, scoreSleep: 4, scoreAnxiety: 6,
     affiliatePrimary: "https://www.mindlabpro.com/?a_aid=nootropicstacker", affiliatePrimaryLabel: "Mind Lab Pro",
     affiliateSecondary: "https://nootropicsdepot.com/phosphatidylserine-capsules/?rfsn=supplement-stacker", affiliateSecondaryLabel: "Nootropics Depot",
-    affiliateAmazon: "https://www.amazon.com/s?k=phosphatidylserine+supplement&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=phosphatidylserine+supplement&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: false,
   },
   {
-    slug: "rhodiola-rosea",
+    slug: "rhodiola",
     name: "Rhodiola Rosea",
     category: "Adaptogen",
     summary: "A powerful adaptogenic herb that combats mental fatigue, improves stress resilience, and boosts physical and cognitive performance under pressure.",
@@ -93,7 +93,7 @@ const supplementData = [
     scoreEnergy: 7, scoreMood: 8, scoreMemory: 5, scoreFocus: 7, scoreCreativity: 6, scoreSleep: 3, scoreAnxiety: 7,
     affiliatePrimary: "https://nootropicsdepot.com/rhodiola-rosea-capsules/?rfsn=supplement-stacker", affiliatePrimaryLabel: "Nootropics Depot",
     affiliateSecondary: "https://www.iherb.com/c/rhodiola-rosea?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=rhodiola+rosea+supplement&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=rhodiola+rosea+supplement&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: true,
   },
   {
@@ -106,11 +106,11 @@ const supplementData = [
     scoreEnergy: 5, scoreMood: 8, scoreMemory: 5, scoreFocus: 5, scoreCreativity: 4, scoreSleep: 8, scoreAnxiety: 9,
     affiliatePrimary: "https://neurohacker.com/shop/qualia-resilience?rfsn=supplement-stacker", affiliatePrimaryLabel: "Neurohacker",
     affiliateSecondary: "https://www.iherb.com/c/ashwagandha?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=ashwagandha+ksm-66&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=ashwagandha+ksm-66&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: true,
   },
   {
-    slug: "magnesium-l-threonate",
+    slug: "magnesium",
     name: "Magnesium L-Threonate",
     category: "Mineral",
     summary: "The only form of magnesium clinically shown to cross the blood-brain barrier, directly increasing synaptic density and improving memory and sleep.",
@@ -119,7 +119,7 @@ const supplementData = [
     scoreEnergy: 3, scoreMood: 6, scoreMemory: 8, scoreFocus: 6, scoreCreativity: 5, scoreSleep: 9, scoreAnxiety: 7,
     affiliatePrimary: "https://www.thorne.com/products/dp/magnesium-bisglycinate?ref=nootropicstacker", affiliatePrimaryLabel: "Thorne",
     affiliateSecondary: "https://nootropicsdepot.com/magnesium-l-threonate-capsules/?rfsn=supplement-stacker", affiliateSecondaryLabel: "Nootropics Depot",
-    affiliateAmazon: "https://www.amazon.com/s?k=magnesium+l-threonate&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=magnesium+l-threonate&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: true,
   },
   {
@@ -132,7 +132,7 @@ const supplementData = [
     scoreEnergy: 7, scoreMood: 7, scoreMemory: 5, scoreFocus: 8, scoreCreativity: 6, scoreSleep: 1, scoreAnxiety: 3,
     affiliatePrimary: "https://nootropicsdepot.com/n-acetyl-l-tyrosine-capsules/?rfsn=supplement-stacker", affiliatePrimaryLabel: "Nootropics Depot",
     affiliateSecondary: "https://www.iherb.com/c/l-tyrosine?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=n-acetyl+l-tyrosine+nalt&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=n-acetyl+l-tyrosine+nalt&tag=nootropicstk-20",
     safetyRating: "safe" as const, isPopular: false, isFeatured: false,
   },
   {
@@ -145,7 +145,7 @@ const supplementData = [
     scoreEnergy: 7, scoreMood: 6, scoreMemory: 7, scoreFocus: 7, scoreCreativity: 5, scoreSleep: 2, scoreAnxiety: 4,
     affiliatePrimary: "https://www.mindlabpro.com/?a_aid=nootropicstacker", affiliatePrimaryLabel: "Mind Lab Pro",
     affiliateSecondary: "https://www.iherb.com/c/panax-ginseng?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=panax+ginseng+supplement&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=panax+ginseng+supplement&tag=nootropicstk-20",
     safetyRating: "safe" as const, isPopular: false, isFeatured: false,
   },
   {
@@ -158,7 +158,7 @@ const supplementData = [
     scoreEnergy: 5, scoreMood: 5, scoreMemory: 7, scoreFocus: 7, scoreCreativity: 4, scoreSleep: 3, scoreAnxiety: 4,
     affiliatePrimary: "https://www.mindlabpro.com/?a_aid=nootropicstacker", affiliatePrimaryLabel: "Mind Lab Pro",
     affiliateSecondary: "https://nootropicsdepot.com/pycnogenol-capsules/?rfsn=supplement-stacker", affiliateSecondaryLabel: "Nootropics Depot",
-    affiliateAmazon: "https://www.amazon.com/s?k=pine+bark+extract+pycnogenol&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=pine+bark+extract+pycnogenol&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: false, isFeatured: false,
   },
   {
@@ -171,7 +171,7 @@ const supplementData = [
     scoreEnergy: 4, scoreMood: 7, scoreMemory: 5, scoreFocus: 5, scoreCreativity: 4, scoreSleep: 5, scoreAnxiety: 6,
     affiliatePrimary: "https://www.thorne.com/products/dp/b-complex-plus?ref=nootropicstacker", affiliatePrimaryLabel: "Thorne",
     affiliateSecondary: "https://www.iherb.com/c/vitamin-b6?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=vitamin+b6+p5p+supplement&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=vitamin+b6+p5p+supplement&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: false, isFeatured: false,
   },
   {
@@ -184,11 +184,11 @@ const supplementData = [
     scoreEnergy: 6, scoreMood: 6, scoreMemory: 5, scoreFocus: 5, scoreCreativity: 3, scoreSleep: 3, scoreAnxiety: 4,
     affiliatePrimary: "https://www.thorne.com/products/dp/b12?ref=nootropicstacker", affiliatePrimaryLabel: "Thorne",
     affiliateSecondary: "https://www.iherb.com/c/vitamin-b12?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=vitamin+b12+methylcobalamin&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=vitamin+b12+methylcobalamin&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: false, isFeatured: false,
   },
   {
-    slug: "omega-3-dha",
+    slug: "omega-3",
     name: "Omega-3 (DHA/EPA)",
     category: "Essential Fatty Acid",
     summary: "DHA is the primary structural fat in the brain; omega-3 supplementation supports neuroplasticity, mood, and long-term cognitive health.",
@@ -197,7 +197,7 @@ const supplementData = [
     scoreEnergy: 3, scoreMood: 7, scoreMemory: 7, scoreFocus: 6, scoreCreativity: 5, scoreSleep: 5, scoreAnxiety: 6,
     affiliatePrimary: "https://www.thorne.com/products/dp/super-epa?ref=nootropicstacker", affiliatePrimaryLabel: "Thorne",
     affiliateSecondary: "https://www.iherb.com/c/fish-oil?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=omega+3+fish+oil+dha+epa&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=omega+3+fish+oil+dha+epa&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: false,
   },
   {
@@ -210,7 +210,7 @@ const supplementData = [
     scoreEnergy: 10, scoreMood: 6, scoreMemory: 5, scoreFocus: 9, scoreCreativity: 5, scoreSleep: 0, scoreAnxiety: 1,
     affiliatePrimary: "https://nootropicsdepot.com/caffeine-capsules/?rfsn=supplement-stacker", affiliatePrimaryLabel: "Nootropics Depot",
     affiliateSecondary: "https://www.iherb.com/c/caffeine?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=caffeine+200mg+capsules&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=caffeine+200mg+capsules&tag=nootropicstk-20",
     safetyRating: "safe" as const, isPopular: true, isFeatured: false,
   },
   {
@@ -223,7 +223,7 @@ const supplementData = [
     scoreEnergy: 7, scoreMood: 5, scoreMemory: 7, scoreFocus: 6, scoreCreativity: 4, scoreSleep: 3, scoreAnxiety: 3,
     affiliatePrimary: "https://www.onnit.com/creatine/?a_aid=nootropicstacker", affiliatePrimaryLabel: "Onnit",
     affiliateSecondary: "https://www.iherb.com/c/creatine?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=creatine+monohydrate&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=creatine+monohydrate&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: false,
   },
   {
@@ -236,7 +236,7 @@ const supplementData = [
     scoreEnergy: 8, scoreMood: 8, scoreMemory: 9, scoreFocus: 9, scoreCreativity: 8, scoreSleep: 4, scoreAnxiety: 6,
     affiliatePrimary: "https://neurohacker.com/shop/qualia-mind?rfsn=supplement-stacker", affiliatePrimaryLabel: "Neurohacker (15% off)",
     affiliateSecondary: null, affiliateSecondaryLabel: null,
-    affiliateAmazon: "https://www.amazon.com/s?k=qualia+mind+neurohacker&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=qualia+mind+neurohacker&tag=nootropicstk-20",
     safetyRating: "safe" as const, isPopular: true, isFeatured: true,
   },
   {
@@ -249,7 +249,7 @@ const supplementData = [
     scoreEnergy: 7, scoreMood: 8, scoreMemory: 9, scoreFocus: 9, scoreCreativity: 7, scoreSleep: 4, scoreAnxiety: 7,
     affiliatePrimary: "https://www.mindlabpro.com/?a_aid=nootropicstacker", affiliatePrimaryLabel: "Mind Lab Pro (Official)",
     affiliateSecondary: null, affiliateSecondaryLabel: null,
-    affiliateAmazon: "https://www.amazon.com/s?k=mind+lab+pro&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=mind+lab+pro&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: true,
   },
   {
@@ -262,7 +262,7 @@ const supplementData = [
     scoreEnergy: 4, scoreMood: 5, scoreMemory: 8, scoreFocus: 7, scoreCreativity: 4, scoreSleep: 3, scoreAnxiety: 4,
     affiliatePrimary: "https://nootropicsdepot.com/ginkgo-biloba-capsules/?rfsn=supplement-stacker", affiliatePrimaryLabel: "Nootropics Depot",
     affiliateSecondary: "https://www.iherb.com/c/ginkgo-biloba?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=ginkgo+biloba+supplement&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=ginkgo+biloba+supplement&tag=nootropicstk-20",
     safetyRating: "safe" as const, isPopular: false, isFeatured: false,
   },
   {
@@ -275,7 +275,7 @@ const supplementData = [
     scoreEnergy: 1, scoreMood: 5, scoreMemory: 4, scoreFocus: 2, scoreCreativity: 2, scoreSleep: 10, scoreAnxiety: 5,
     affiliatePrimary: "https://www.iherb.com/c/melatonin?rcode=NSTACKER", affiliatePrimaryLabel: "iHerb",
     affiliateSecondary: "https://www.thorne.com/products/dp/melaton-3?ref=nootropicstacker", affiliateSecondaryLabel: "Thorne",
-    affiliateAmazon: "https://www.amazon.com/s?k=melatonin+0.5mg+low+dose&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=melatonin+0.5mg+low+dose&tag=nootropicstk-20",
     safetyRating: "safe" as const, isPopular: true, isFeatured: false,
   },
   {
@@ -288,7 +288,7 @@ const supplementData = [
     scoreEnergy: 5, scoreMood: 7, scoreMemory: 5, scoreFocus: 5, scoreCreativity: 3, scoreSleep: 5, scoreAnxiety: 5,
     affiliatePrimary: "https://www.thorne.com/products/dp/vitamin-d-k2?ref=nootropicstacker", affiliatePrimaryLabel: "Thorne",
     affiliateSecondary: "https://www.iherb.com/c/vitamin-d3?rcode=NSTACKER", affiliateSecondaryLabel: "iHerb",
-    affiliateAmazon: "https://www.amazon.com/s?k=vitamin+d3+k2+supplement&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=vitamin+d3+k2+supplement&tag=nootropicstk-20",
     safetyRating: "very_safe" as const, isPopular: true, isFeatured: false,
   },
   {
@@ -301,7 +301,7 @@ const supplementData = [
     scoreEnergy: 5, scoreMood: 6, scoreMemory: 9, scoreFocus: 8, scoreCreativity: 7, scoreSleep: 2, scoreAnxiety: 5,
     affiliatePrimary: "https://nootropicsdepot.com/noopept-capsules/?rfsn=supplement-stacker", affiliatePrimaryLabel: "Nootropics Depot",
     affiliateSecondary: null, affiliateSecondaryLabel: null,
-    affiliateAmazon: "https://www.amazon.com/s?k=noopept+nootropic&tag=nootropicstack-20",
+    affiliateAmazon: "https://www.amazon.com/s?k=noopept+nootropic&tag=nootropicstk-20",
     safetyRating: "moderate" as const, isPopular: false, isFeatured: false,
   },
   {

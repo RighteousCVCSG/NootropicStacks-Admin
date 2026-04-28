@@ -10,6 +10,7 @@ const footerColumns = [
       { href: "/best-stacks", label: "Best Stacks" },
       { href: "/nootropics-for-focus", label: "Nootropics for Focus" },
       { href: "/nootropics-for-anxiety", label: "Nootropics for Anxiety" },
+      { href: "/celebrity-stacks", label: "Celebrity Stacks" },
     ],
   },
   {

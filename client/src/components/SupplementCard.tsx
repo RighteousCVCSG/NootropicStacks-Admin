@@ -3,8 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { ShoppingCart, ExternalLink, Plus } from "lucide-react";
+import { ShoppingCart, ExternalLink, Plus, Check } from "lucide-react";
 import type { Supplement } from "../../../drizzle/schema";
+import { useQuickStack } from "@/contexts/QuickStackContext";
 
 interface Props {
   supplement: Supplement & { _score?: number };
@@ -36,6 +37,8 @@ const SCORE_BARS = [
 
 export default function SupplementCard({ supplement: s, onAddToStack, showAddButton = false, isInStack = false }: Props) {
   const trackClick = trpc.affiliate.trackClick.useMutation();
+  const { addItem, hasItem, removeItem } = useQuickStack();
+  const inQuickStack = hasItem(s.slug);
 
   const handleBuyClick = (url: string, partner: string) => {
     trackClick.mutate({
@@ -123,6 +126,19 @@ export default function SupplementCard({ supplement: s, onAddToStack, showAddBut
             {isInStack ? "Added" : "Add to Stack"}
           </Button>
         )}
+        <Button
+          size="sm"
+          variant={inQuickStack ? "secondary" : "outline"}
+          className="shrink-0"
+          aria-label={inQuickStack ? `Remove ${s.name} from quick stack` : `Add ${s.name} to quick stack`}
+          onClick={() =>
+            inQuickStack
+              ? removeItem(s.slug)
+              : addItem({ slug: s.slug, name: s.name })
+          }
+        >
+          {inQuickStack ? <Check className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
+        </Button>
         {primaryUrl && (
           <Button
             size="sm"

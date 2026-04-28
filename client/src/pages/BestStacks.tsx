@@ -3,6 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight, Brain, FlaskConical, Moon, Zap, Heart, Leaf, Layers } from "lucide-react";
+import { useQuickStack } from "@/contexts/QuickStackContext";
+import { toast } from "sonner";
 
 const STACKS = [
   {
@@ -13,6 +15,7 @@ const STACKS = [
     difficulty: "Beginner",
     color: "border-blue-500/20 bg-blue-500/5",
     badgeColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    slugs: ['l-theanine', 'caffeine', 'lions-mane'],
     supplements: [
       { name: "L-Theanine", dose: "200mg", timing: "Morning" },
       { name: "Caffeine", dose: "100mg", timing: "Morning" },
@@ -29,6 +32,7 @@ const STACKS = [
     difficulty: "Intermediate",
     color: "border-purple-500/20 bg-purple-500/5",
     badgeColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    slugs: ['bacopa-monnieri', 'alpha-gpc', 'l-theanine'],
     supplements: [
       { name: "Bacopa Monnieri", dose: "300mg", timing: "With lunch" },
       { name: "Alpha GPC", dose: "300mg", timing: "Morning" },
@@ -45,6 +49,7 @@ const STACKS = [
     difficulty: "Beginner",
     color: "border-green-500/20 bg-green-500/5",
     badgeColor: "bg-green-500/10 text-green-400 border-green-500/20",
+    slugs: ['ashwagandha', 'l-theanine', 'magnesium-glycinate'],
     supplements: [
       { name: "Ashwagandha", dose: "600mg", timing: "Morning" },
       { name: "L-Theanine", dose: "400mg", timing: "As needed" },
@@ -61,6 +66,7 @@ const STACKS = [
     difficulty: "Intermediate",
     color: "border-violet-500/20 bg-violet-500/5",
     badgeColor: "bg-violet-500/10 text-violet-400 border-violet-500/20",
+    slugs: ['bacopa-monnieri', 'lions-mane', 'omega-3'],
     supplements: [
       { name: "Bacopa Monnieri", dose: "300mg", timing: "With lunch" },
       { name: "Lion's Mane", dose: "500mg", timing: "Morning" },
@@ -77,6 +83,7 @@ const STACKS = [
     difficulty: "Beginner",
     color: "border-yellow-500/20 bg-yellow-500/5",
     badgeColor: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
+    slugs: ['rhodiola', 'coq10', 'l-tyrosine'],
     supplements: [
       { name: "Rhodiola Rosea", dose: "200mg", timing: "Morning, empty stomach" },
       { name: "CoQ10", dose: "200mg", timing: "With breakfast" },
@@ -93,6 +100,7 @@ const STACKS = [
     difficulty: "Beginner",
     color: "border-indigo-500/20 bg-indigo-500/5",
     badgeColor: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
+    slugs: ['magnesium-glycinate', 'l-theanine', 'melatonin'],
     supplements: [
       { name: "Magnesium Glycinate", dose: "400mg", timing: "30–60 min before bed" },
       { name: "L-Theanine", dose: "200mg", timing: "30–60 min before bed" },
@@ -109,6 +117,7 @@ const STACKS = [
     difficulty: "Beginner",
     color: "border-rose-500/20 bg-rose-500/5",
     badgeColor: "bg-rose-500/10 text-rose-400 border-rose-500/20",
+    slugs: ['ashwagandha', 'rhodiola', 'omega-3'],
     supplements: [
       { name: "Ashwagandha", dose: "600mg", timing: "Morning" },
       { name: "Rhodiola Rosea", dose: "200mg", timing: "Morning" },
@@ -125,6 +134,7 @@ const STACKS = [
     difficulty: "Intermediate",
     color: "border-teal-500/20 bg-teal-500/5",
     badgeColor: "bg-teal-500/10 text-teal-400 border-teal-500/20",
+    slugs: ['nmn', 'coq10', 'omega-3'],
     supplements: [
       { name: "NMN", dose: "500mg", timing: "Morning, empty stomach" },
       { name: "CoQ10", dose: "200mg", timing: "With breakfast" },
@@ -141,6 +151,15 @@ const DIFFICULTY_COLORS: Record<string, string> = {
 };
 
 export default function BestStacks() {
+  const { addItem } = useQuickStack();
+
+  const loadStack = (stack: typeof STACKS[number]) => {
+    stack.slugs.forEach((slug, i) => {
+      addItem({ slug, name: stack.supplements[i]?.name ?? slug });
+    });
+    toast.success(`${stack.name} loaded! (${stack.slugs.length} supplements added)`);
+  };
+
   return (
     <main className="min-h-screen py-12">
       <div className="container max-w-4xl">
@@ -212,11 +231,10 @@ export default function BestStacks() {
                   </p>
 
                   {/* CTA */}
-                  <Link href="/builder">
-                    <Button size="sm" variant="outline" className="border-border/50 gap-1.5 text-xs">
-                      Build This Stack <ArrowRight className="w-3 h-3" />
-                    </Button>
-                  </Link>
+                  <Button size="sm" variant="outline" className="w-full text-xs border-border/50 gap-1"
+                    onClick={() => loadStack(stack)}>
+                    Build This Stack <ArrowRight className="w-3 h-3" />
+                  </Button>
                 </div>
               </div>
             </div>

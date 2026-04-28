@@ -25,10 +25,13 @@ import Glossary from "./pages/Glossary";
 import ComparisonPage from "./pages/ComparisonPage";
 import Videos from "./pages/Videos";
 import ResearchLibrary from "./pages/ResearchLibrary";
+import CelebrityStacks from "./pages/CelebrityStacks";
 import Nav from "./components/Nav";
 import AffiliateDisclosure from "./components/AffiliateDisclosure";
 import Footer from "./components/Footer";
 import PixelBuddy from "./components/PixelBuddy";
+import StackScoreWidget from "./components/StackScoreWidget";
+import { QuickStackProvider } from "./contexts/QuickStackContext";
 
 function Router() {
   return (
@@ -56,12 +59,14 @@ function Router() {
         <Route path="/compare-supplements" component={ComparisonPage} />
         <Route path="/videos" component={Videos} />
         <Route path="/research" component={ResearchLibrary} />
+        <Route path="/celebrity-stacks" component={CelebrityStacks} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
       <AffiliateDisclosure />
       <Footer />
       <PixelBuddy />
+      <StackScoreWidget />
     </div>
   );
 }
@@ -72,7 +77,9 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster theme="dark" />
-          <Router />
+          <QuickStackProvider>
+            <Router />
+          </QuickStackProvider>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
