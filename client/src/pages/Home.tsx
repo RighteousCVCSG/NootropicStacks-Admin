@@ -83,6 +83,9 @@ export default function Home() {
                 </Link>
               </Button>
             </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Build a stack, compare vendors, and buy from trusted sellers — no signup required.
+            </p>
 
             {/* Stats row */}
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-md mx-auto">
