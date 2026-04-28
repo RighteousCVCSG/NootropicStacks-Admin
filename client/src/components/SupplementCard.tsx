@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { ShoppingCart, ExternalLink, Plus, Check } from "lucide-react";
 import type { Supplement } from "../../../drizzle/schema";
 import { useQuickStack } from "@/contexts/QuickStackContext";
+import { resolveBuyUrl } from "@/lib/affiliate-fallback";
 
 interface Props {
   supplement: Supplement & { _score?: number };
@@ -50,8 +51,8 @@ export default function SupplementCard({ supplement: s, onAddToStack, showAddBut
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  const primaryUrl = s.affiliatePrimary;
-  const primaryLabel = s.affiliatePrimaryLabel ?? "Buy Now";
+  const primaryUrl = resolveBuyUrl(s.affiliatePrimary, s.name);
+  const primaryLabel = s.affiliatePrimary ? (s.affiliatePrimaryLabel ?? "Buy Now") : "Buy on Amazon";
 
   return (
     <div className="group relative flex flex-col rounded-xl border border-border/50 bg-card p-5 card-hover overflow-hidden">

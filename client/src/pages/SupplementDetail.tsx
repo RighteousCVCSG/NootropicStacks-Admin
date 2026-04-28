@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AffiliateBanner from "@/components/AffiliateBanner";
 import { SPONSORED_BANNERS, AFFILIATE_PARTNERS } from "../../../shared/affiliates";
+import { amazonFallbackUrl, iherbFallbackUrl } from "@/lib/affiliate-fallback";
 import { ArrowLeft, ShoppingCart, ExternalLink, Shield, Zap } from "lucide-react";
 
 const SCORE_ITEMS = [
@@ -189,16 +190,22 @@ export default function SupplementDetail() {
                   <ExternalLink className="w-3 h-3 ml-auto" />
                 </Button>
               )}
-              {supp.affiliateAmazon && (
-                <Button
-                  variant="ghost"
-                  className="w-full text-muted-foreground hover:text-foreground"
-                  onClick={() => handleBuy(supp.affiliateAmazon!, "Amazon")}
-                >
-                  Amazon
-                  <ExternalLink className="w-3 h-3 ml-auto" />
-                </Button>
-              )}
+              <Button
+                variant={supp.affiliatePrimary ? "ghost" : "outline"}
+                className={supp.affiliatePrimary ? "w-full text-muted-foreground hover:text-foreground" : "w-full"}
+                onClick={() => handleBuy(supp.affiliateAmazon ?? amazonFallbackUrl(supp.name), "Amazon")}
+              >
+                Amazon
+                <ExternalLink className="w-3 h-3 ml-auto" />
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full text-muted-foreground hover:text-foreground"
+                onClick={() => handleBuy(iherbFallbackUrl(supp.name), "iHerb")}
+              >
+                iHerb
+                <ExternalLink className="w-3 h-3 ml-auto" />
+              </Button>
               <p className="text-xs text-muted-foreground pt-1">
                 Affiliate links — we may earn a commission at no extra cost to you.
               </p>
