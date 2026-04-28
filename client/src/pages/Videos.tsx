@@ -4,6 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight, PlayCircle, ExternalLink } from "lucide-react";
 
+type ThumbTheme = {
+  // Two stops + a third highlight; mostly tuned for the dark UI.
+  from: string;
+  via: string;
+  to: string;
+  glyph: string; // Big background symbol
+  textColor: string;
+};
+
 const ALL_VIDEOS = [
   {
     id: "1",
@@ -13,6 +22,7 @@ const ALL_VIDEOS = [
     channel: "Huberman Lab",
     description: "Deep dive into Lion's Mane mushroom — how NGF stimulation works, the clinical evidence for neuroplasticity, and optimal dosing protocols.",
     youtubeSearch: "lion's mane mushroom NGF neuroplasticity nootropic",
+    theme: { from: "#0d1f2d", via: "#0f3a3a", to: "#1c5b4a", glyph: "🍄", textColor: "#9ee9c5" } as ThumbTheme,
   },
   {
     id: "2",
@@ -22,6 +32,7 @@ const ALL_VIDEOS = [
     channel: "Nootropics Expert",
     description: "Everything you need to know about Ashwagandha — mechanisms, what the RCTs actually show, and how to use KSM-66 vs Sensoril.",
     youtubeSearch: "ashwagandha KSM-66 cortisol stress nootropic science",
+    theme: { from: "#1a0f2e", via: "#3a1f5b", to: "#5e3a92", glyph: "🌿", textColor: "#d8c4ff" } as ThumbTheme,
   },
   {
     id: "3",
@@ -31,6 +42,7 @@ const ALL_VIDEOS = [
     channel: "Examine.com",
     description: "Why Bacopa is the most clinically validated memory supplement — mechanism, timing, and what 4–8 weeks of consistent use actually does.",
     youtubeSearch: "bacopa monnieri memory enhancement clinical science",
+    theme: { from: "#0b1d2b", via: "#15425e", to: "#2a78a8", glyph: "🧠", textColor: "#a5dbff" } as ThumbTheme,
   },
   {
     id: "4",
@@ -40,6 +52,7 @@ const ALL_VIDEOS = [
     channel: "Nootropics Expert",
     description: "A beginner-friendly framework for building your first nootropic stack — starting simple, understanding synergy, and layering up safely.",
     youtubeSearch: "how to build nootropic stack beginners guide",
+    theme: { from: "#102015", via: "#1f4a32", to: "#3d8a5e", glyph: "🧱", textColor: "#b8f0cc" } as ThumbTheme,
   },
   {
     id: "5",
@@ -49,6 +62,7 @@ const ALL_VIDEOS = [
     channel: "Thomas DeLauer",
     description: "Why caffeine + L-theanine is the most-studied nootropic pairing in existence — the science behind synergy and how to dial in your ratio.",
     youtubeSearch: "caffeine l-theanine stack combination science benefits",
+    theme: { from: "#1f150b", via: "#5b3a1c", to: "#a76a35", glyph: "☕", textColor: "#ffd9a6" } as ThumbTheme,
   },
   {
     id: "6",
@@ -58,6 +72,7 @@ const ALL_VIDEOS = [
     channel: "Nootropics Expert",
     description: "Building a layered focus stack that covers acetylcholine, neuroplasticity, and anxiety — all in one evidence-based protocol.",
     youtubeSearch: "alpha GPC lion's mane bacopa focus stack nootropics",
+    theme: { from: "#0d1f2d", via: "#1a4a6e", to: "#2e89c7", glyph: "🎯", textColor: "#aae0ff" } as ThumbTheme,
   },
   {
     id: "7",
@@ -67,6 +82,7 @@ const ALL_VIDEOS = [
     channel: "Huberman Lab",
     description: "A plain-English explainer on the neuroscience behind nootropics — receptors, neurotransmitters, and what cognitive enhancement actually means.",
     youtubeSearch: "nootropics neuroscience mechanisms receptors explained",
+    theme: { from: "#0f0a1f", via: "#2c1f5b", to: "#4a3a92", glyph: "⚛️", textColor: "#c3b3ff" } as ThumbTheme,
   },
   {
     id: "8",
@@ -76,6 +92,7 @@ const ALL_VIDEOS = [
     channel: "Huberman Lab",
     description: "Understanding the three stages of memory formation and which supplements meaningfully target each stage of the process.",
     youtubeSearch: "memory encoding consolidation retrieval neuroscience",
+    theme: { from: "#0a1f1f", via: "#1f4a4a", to: "#3a8a8a", glyph: "💡", textColor: "#a8e8e8" } as ThumbTheme,
   },
   {
     id: "9",
@@ -85,6 +102,7 @@ const ALL_VIDEOS = [
     channel: "Andrew Huberman",
     description: "The science of neuroplasticity and how nootropics like Lion's Mane and Bacopa support long-term structural brain changes.",
     youtubeSearch: "neuroplasticity brain rewiring science nootropics",
+    theme: { from: "#1f0a1f", via: "#5b1f5b", to: "#a23a8a", glyph: "🌌", textColor: "#ffb8e8" } as ThumbTheme,
   },
   {
     id: "10",
@@ -94,6 +112,7 @@ const ALL_VIDEOS = [
     channel: "Huberman Lab",
     description: "Why sleep is the most powerful nootropic and how to structure your supplement stack around sleep quality for maximum cognitive output.",
     youtubeSearch: "sleep optimization cognitive performance nootropic recovery",
+    theme: { from: "#08111f", via: "#1a2c5b", to: "#3a5a92", glyph: "🌙", textColor: "#b8caff" } as ThumbTheme,
   },
   {
     id: "11",
@@ -103,6 +122,7 @@ const ALL_VIDEOS = [
     channel: "Thomas DeLauer",
     description: "How to sequence your nootropics with breakfast, coffee, and your morning workflow for maximum effect — practical and science-backed.",
     youtubeSearch: "morning routine nootropics timing sequencing biohacking",
+    theme: { from: "#1f1a0a", via: "#5b4a1f", to: "#c79235", glyph: "☀️", textColor: "#ffe5a6" } as ThumbTheme,
   },
   {
     id: "12",
@@ -112,6 +132,7 @@ const ALL_VIDEOS = [
     channel: "Tim Ferriss",
     description: "A grounded introduction to biohacking — cutting through the hype to the highest-leverage basics that actually move the needle.",
     youtubeSearch: "biohacking basics fundamentals supplements cognitive",
+    theme: { from: "#0a1a1a", via: "#1f3a4a", to: "#3a7080", glyph: "⚡", textColor: "#a8e0ff" } as ThumbTheme,
   },
 ];
 
@@ -132,22 +153,67 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 function VideoCard({ video }: { video: typeof ALL_VIDEOS[number] }) {
   const youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(video.youtubeSearch)}`;
+  const { from, via, to, glyph, textColor } = video.theme;
 
   return (
     <div className="rounded-xl border border-border/50 bg-card overflow-hidden flex flex-col group hover:border-border transition-colors">
-      {/* Thumbnail placeholder */}
+      {/* Themed thumbnail */}
       <a
         href={youtubeUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative w-full bg-secondary/40 flex items-center justify-center hover:bg-secondary/60 transition-colors"
-        style={{ aspectRatio: "16/9" }}
+        className="relative w-full overflow-hidden"
+        style={{
+          aspectRatio: "16/9",
+          background: `linear-gradient(135deg, ${from} 0%, ${via} 50%, ${to} 100%)`,
+        }}
         aria-label={`Watch: ${video.title}`}
       >
-        <div className="w-14 h-14 rounded-full bg-card/90 border border-border/50 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/50 transition-all">
-          <PlayCircle className="w-8 h-8 text-primary" />
+        {/* Background glyph — large, faded */}
+        <span
+          aria-hidden
+          className="absolute select-none pointer-events-none"
+          style={{
+            top: "50%",
+            left: "50%",
+            transform: "translate(-30%, -55%) rotate(-12deg)",
+            fontSize: "9rem",
+            opacity: 0.18,
+            filter: "blur(0.5px)",
+            lineHeight: 1,
+          }}
+        >
+          {glyph}
+        </span>
+
+        {/* Title — overlaid in upper-left */}
+        <div
+          className="absolute top-3 left-3 right-3 font-semibold leading-tight"
+          style={{
+            color: textColor,
+            fontSize: "0.85rem",
+            textShadow: "0 1px 4px rgba(0,0,0,0.5)",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {video.title}
         </div>
-        <div className="absolute bottom-2 right-2">
+
+        {/* Center play icon */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-14 h-14 rounded-full bg-black/40 backdrop-blur border border-white/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-black/60 transition-all">
+            <PlayCircle className="w-8 h-8 text-white drop-shadow" />
+          </div>
+        </div>
+
+        {/* Channel chip + YouTube badge */}
+        <div className="absolute bottom-2 left-2 right-2 flex items-end justify-between gap-2">
+          <span className="text-[0.65rem] font-semibold text-white/90 bg-black/50 backdrop-blur px-2 py-0.5 rounded">
+            {video.channel}
+          </span>
           <Badge className="bg-black/70 text-white border-0 text-xs gap-1">
             <ExternalLink className="w-2.5 h-2.5" /> YouTube
           </Badge>
