@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -8,11 +8,14 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import SupplementCard from "@/components/SupplementCard";
+import BuyBundleSheet from "@/components/BuyBundleSheet";
+import { useQuickStack } from "@/contexts/QuickStackContext";
 import { GOALS } from "../../../shared/affiliates";
-import { Brain, Search, Trash2, Save, Share2, Plus, X } from "lucide-react";
+import { Brain, Search, Trash2, Save, Share2, Plus, X, ShoppingCart } from "lucide-react";
 
 interface StackItem {
   supplementId: number;
+  slug: string;
   name: string;
   dosageMg?: number;
   timing?: string;
@@ -31,11 +34,33 @@ export default function StackBuilder() {
   const [isPublic, setIsPublic] = useState(false);
   const [savedStackId, setSavedStackId] = useState<number | null>(null);
   const [shareToken, setShareToken] = useState<string | null>(null);
+  const [buyOpen, setBuyOpen] = useState(false);
+  const quickStack = useQuickStack();
 
   const supplementsQuery = trpc.supplements.list.useQuery({
     search: debouncedSearch || undefined,
     limit: 24,
   });
+
+  const allSupplementsQuery = trpc.supplements.list.useQuery({ limit: 100 });
+
+  useEffect(() => {
+    if (!allSupplementsQuery.data?.items || quickStack.items.length === 0) return;
+    if (stackItems.length > 0) return;
+    const lookup = new Map(allSupplementsQuery.data.items.map((s) => [s.slug, s]));
+    const seeded: StackItem[] = [];
+    quickStack.items.forEach((qi, idx) => {
+      const supp = lookup.get(qi.slug);
+      if (!supp) return;
+      seeded.push({
+        supplementId: supp.id,
+        slug: supp.slug,
+        name: supp.name,
+        sortOrder: idx,
+      });
+    });
+    if (seeded.length > 0) setStackItems(seeded);
+  }, [allSupplementsQuery.data?.items, quickStack.items, stackItems.length]);
 
   const recommendQuery = trpc.supplements.recommend.useQuery(
     { goals: selectedGoals, limit: 12 },
@@ -63,20 +88,26 @@ export default function StackBuilder() {
     );
   };
 
-  const addToStack = (supplementId: number, name: string) => {
+  const addToStack = (supplementId: number, name: string, slug: string) => {
     if (stackItems.find((i) => i.supplementId === supplementId)) {
       toast.info(`${name} is already in your stack.`);
       return;
     }
     setStackItems((prev) => [
       ...prev,
-      { supplementId, name, sortOrder: prev.length },
+      { supplementId, slug, name, sortOrder: prev.length },
     ]);
-    toast.success(`${name} added to stack!`);
+    if (!quickStack.hasItem(slug)) {
+      quickStack.addItem({ slug, name });
+    } else {
+      toast.success(`${name} added to stack!`);
+    }
   };
 
   const removeFromStack = (supplementId: number) => {
+    const removed = stackItems.find((i) => i.supplementId === supplementId);
     setStackItems((prev) => prev.filter((i) => i.supplementId !== supplementId));
+    if (removed) quickStack.removeItem(removed.slug);
   };
 
   const saveStack = () => {
@@ -173,7 +204,7 @@ export default function StackBuilder() {
                     supplement={supp}
                     showAddButton
                     isInStack={stackIds.has(supp.id)}
-                    onAddToStack={(id) => addToStack(id, supp.name)}
+                    onAddToStack={(id) => addToStack(id, supp.name, supp.slug)}
                   />
                 ))}
               </div>
@@ -247,8 +278,17 @@ export default function StackBuilder() {
                 )}
               </div>
 
-              {/* Save & Share */}
+              {/* Buy & Save */}
               <div className="space-y-2">
+                <Button
+                  className="w-full glow-green"
+                  onClick={() => setBuyOpen(true)}
+                  disabled={stackItems.length === 0}
+                  size="lg"
+                >
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Buy This Stack
+                </Button>
                 {savedStackId ? (
                   <>
                     <div className="p-3 rounded-lg border border-primary/30 bg-primary/10 text-center">
@@ -266,7 +306,8 @@ export default function StackBuilder() {
                   </>
                 ) : (
                   <Button
-                    className="w-full glow-green"
+                    variant="outline"
+                    className="w-full"
                     onClick={saveStack}
                     disabled={createStack.isPending || stackItems.length === 0}
                   >
@@ -276,7 +317,7 @@ export default function StackBuilder() {
                 )}
                 {!isAuthenticated && (
                   <p className="text-xs text-muted-foreground text-center">
-                    Sign in to save and share your stacks.
+                    Save & share require sign in. Buying does not.
                   </p>
                 )}
               </div>
@@ -284,6 +325,32 @@ export default function StackBuilder() {
           </div>
         </div>
       </div>
+
+      {/* Mobile sticky stack bar */}
+      {stackItems.length > 0 && (
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-t border-border/50 px-4 py-3 shadow-lg">
+          <div className="flex items-center gap-3">
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-foreground">
+                {stackItems.length} item{stackItems.length !== 1 ? "s" : ""} in stack
+              </p>
+              <p className="text-xs text-muted-foreground truncate">
+                {stackItems.map((i) => i.name).join(", ")}
+              </p>
+            </div>
+            <Button
+              size="sm"
+              className="glow-green shrink-0"
+              onClick={() => setBuyOpen(true)}
+            >
+              <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
+              Buy
+            </Button>
+          </div>
+        </div>
+      )}
+
+      <BuyBundleSheet open={buyOpen} onOpenChange={setBuyOpen} />
     </main>
   );
 }

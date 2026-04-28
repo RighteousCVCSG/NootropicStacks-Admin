@@ -322,9 +322,34 @@ const supplementData = [
 async function seed() {
   console.log("Seeding supplements...");
   for (const supp of supplementData) {
-    await db.insert(supplements).values(supp).onDuplicateKeyUpdate({ set: { name: supp.name } });
+    await db.insert(supplements).values(supp).onDuplicateKeyUpdate({
+      set: {
+        name: supp.name,
+        category: supp.category,
+        summary: supp.summary,
+        description: supp.description,
+        dosageMin: supp.dosageMin,
+        dosageMax: supp.dosageMax,
+        dosageUnit: supp.dosageUnit,
+        scoreEnergy: supp.scoreEnergy,
+        scoreMood: supp.scoreMood,
+        scoreMemory: supp.scoreMemory,
+        scoreFocus: supp.scoreFocus,
+        scoreCreativity: supp.scoreCreativity,
+        scoreSleep: supp.scoreSleep,
+        scoreAnxiety: supp.scoreAnxiety,
+        affiliatePrimary: supp.affiliatePrimary,
+        affiliatePrimaryLabel: supp.affiliatePrimaryLabel,
+        affiliateSecondary: supp.affiliateSecondary,
+        affiliateSecondaryLabel: supp.affiliateSecondaryLabel,
+        affiliateAmazon: supp.affiliateAmazon,
+        safetyRating: supp.safetyRating,
+        isPopular: supp.isPopular,
+        isFeatured: supp.isFeatured,
+      },
+    });
   }
-  console.log(`✅ Seeded ${supplementData.length} supplements`);
+  console.log(`✅ Seeded ${supplementData.length} supplements (all fields updated)`);
   process.exit(0);
 }
 

@@ -47,7 +47,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Excellent — no known serious side effects at standard doses",
     stacksWith: ["Caffeine", "Ashwagandha", "Bacopa Monnieri"],
     bestFor: ["Focus", "Anxiety reduction", "Sleep quality"],
-    amazonUrl: "https://www.amazon.com/s?k=l-theanine+supplement&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=l-theanine+supplement&tag=nootropicstk-20",
   },
   {
     name: "Ashwagandha",
@@ -60,7 +60,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Good — rare GI discomfort; avoid in pregnancy",
     stacksWith: ["Rhodiola", "L-Theanine", "Magnesium Glycinate"],
     bestFor: ["Stress", "Anxiety", "Sleep", "Recovery"],
-    amazonUrl: "https://www.amazon.com/s?k=ashwagandha+ksm66&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=ashwagandha+ksm66&tag=nootropicstk-20",
   },
   {
     name: "Lion's Mane",
@@ -73,7 +73,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Excellent — well tolerated; rare mushroom allergy possible",
     stacksWith: ["Alpha GPC", "Bacopa Monnieri", "Omega-3 DHA"],
     bestFor: ["Memory", "Neuroplasticity", "Mood", "Long-term brain health"],
-    amazonUrl: "https://www.amazon.com/s?k=lions+mane+mushroom+extract&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=lions+mane+mushroom+extract&tag=nootropicstk-20",
   },
   {
     name: "Bacopa Monnieri",
@@ -86,7 +86,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Good — take with food to minimize GI side effects",
     stacksWith: ["Phosphatidylserine", "Alpha GPC", "Lion's Mane"],
     bestFor: ["Memory", "Learning", "Anxiety reduction", "Exam prep"],
-    amazonUrl: "https://www.amazon.com/s?k=bacopa+monnieri+standardized&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=bacopa+monnieri+standardized&tag=nootropicstk-20",
   },
   {
     name: "Alpha GPC",
@@ -99,7 +99,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Good — headache possible if choline status already high",
     stacksWith: ["Lion's Mane", "Huperzine A", "Bacopa Monnieri"],
     bestFor: ["Focus", "Memory", "Athletic performance", "Acetylcholine support"],
-    amazonUrl: "https://www.amazon.com/s?k=alpha+gpc+supplement&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=alpha+gpc+supplement&tag=nootropicstk-20",
   },
   {
     name: "Magnesium Glycinate",
@@ -112,7 +112,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Excellent — gentle on digestion; very safe at standard doses",
     stacksWith: ["L-Theanine", "Ashwagandha", "Melatonin"],
     bestFor: ["Sleep", "Anxiety", "Stress", "Muscle recovery"],
-    amazonUrl: "https://www.amazon.com/s?k=magnesium+glycinate&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=magnesium+glycinate&tag=nootropicstk-20",
   },
   {
     name: "Omega-3 DHA",
@@ -125,7 +125,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Excellent — mild fishy aftertaste; blood thinning at very high doses",
     stacksWith: ["Lion's Mane", "Phosphatidylserine", "Vitamin D3"],
     bestFor: ["Memory", "Mood", "Long-term brain health", "Inflammation"],
-    amazonUrl: "https://www.amazon.com/s?k=omega+3+dha+supplement&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=omega+3+dha+supplement&tag=nootropicstk-20",
   },
   {
     name: "Rhodiola",
@@ -138,7 +138,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Good — may cause mild insomnia if taken late; cycle recommended",
     stacksWith: ["Ashwagandha", "Caffeine", "L-Theanine"],
     bestFor: ["Energy", "Stress resilience", "Mental fatigue", "Athletic performance"],
-    amazonUrl: "https://www.amazon.com/s?k=rhodiola+rosea+standardized&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=rhodiola+rosea+standardized&tag=nootropicstk-20",
   },
   {
     name: "Citicoline",
@@ -151,7 +151,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Excellent — one of the best-tolerated nootropics",
     stacksWith: ["Lion's Mane", "Bacopa Monnieri", "Piracetam"],
     bestFor: ["Focus", "Memory", "Neuroprotection", "Choline support"],
-    amazonUrl: "https://www.amazon.com/s?k=citicoline+supplement&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=citicoline+supplement&tag=nootropicstk-20",
   },
   {
     name: "Phosphatidylserine",
@@ -164,7 +164,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Excellent — FDA-qualified health claim; very safe",
     stacksWith: ["Bacopa Monnieri", "Omega-3 DHA", "Alpha GPC"],
     bestFor: ["Memory", "Stress", "Cognitive decline prevention", "Focus"],
-    amazonUrl: "https://www.amazon.com/s?k=phosphatidylserine+supplement&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=phosphatidylserine+supplement&tag=nootropicstk-20",
   },
   {
     name: "Creatine",
@@ -177,7 +177,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Excellent — one of the most researched supplements in existence",
     stacksWith: ["Alpha GPC", "Omega-3 DHA", "Vitamin D3"],
     bestFor: ["Memory", "Mental endurance", "Sleep deprivation recovery", "Athletic performance"],
-    amazonUrl: "https://www.amazon.com/s?k=creatine+monohydrate&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=creatine+monohydrate&tag=nootropicstk-20",
   },
   {
     name: "CoQ10",
@@ -190,7 +190,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Excellent — very well tolerated; mild GI discomfort rare",
     stacksWith: ["NMN", "Omega-3 DHA", "Rhodiola"],
     bestFor: ["Energy", "Mental fatigue", "Neuroprotection", "Cardiovascular support"],
-    amazonUrl: "https://www.amazon.com/s?k=coq10+ubiquinol&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=coq10+ubiquinol&tag=nootropicstk-20",
   },
   {
     name: "NMN",
@@ -203,7 +203,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Appears good — human trials limited; no major adverse events reported",
     stacksWith: ["CoQ10", "Omega-3 DHA", "Vitamin D3"],
     bestFor: ["Longevity", "Energy metabolism", "Cognitive aging", "DNA repair"],
-    amazonUrl: "https://www.amazon.com/s?k=nmn+supplement+nad&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=nmn+supplement+nad&tag=nootropicstk-20",
   },
   {
     name: "Huperzine A",
@@ -216,7 +216,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Good — must cycle due to long half-life (10–14 hrs); avoid with cholinergic drugs",
     stacksWith: ["Alpha GPC", "Bacopa Monnieri", "Lion's Mane"],
     bestFor: ["Memory", "Studying", "Alzheimer's prevention", "Focus"],
-    amazonUrl: "https://www.amazon.com/s?k=huperzine+a+supplement&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=huperzine+a+supplement&tag=nootropicstk-20",
   },
   {
     name: "Noopept",
@@ -229,7 +229,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Appears safe at low doses; limited long-term human data",
     stacksWith: ["Citicoline", "Alpha GPC", "Lion's Mane"],
     bestFor: ["Memory", "Focus", "Neuroprotection", "Mood"],
-    amazonUrl: "https://www.amazon.com/s?k=noopept&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=noopept&tag=nootropicstk-20",
   },
   {
     name: "Ginkgo Biloba",
@@ -242,7 +242,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Good — mild blood-thinning; avoid with anticoagulants",
     stacksWith: ["Bacopa Monnieri", "Phosphatidylserine", "Rhodiola"],
     bestFor: ["Memory", "Circulation", "Age-related cognitive decline", "Focus"],
-    amazonUrl: "https://www.amazon.com/s?k=ginkgo+biloba+extract&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=ginkgo+biloba+extract&tag=nootropicstk-20",
   },
   {
     name: "Panax Ginseng",
@@ -255,7 +255,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Good — may interact with blood thinners and diabetes medications",
     stacksWith: ["Rhodiola", "Ginkgo Biloba", "Ashwagandha"],
     bestFor: ["Energy", "Focus", "Immune support", "Sexual function"],
-    amazonUrl: "https://www.amazon.com/s?k=panax+ginseng+extract&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=panax+ginseng+extract&tag=nootropicstk-20",
   },
   {
     name: "Caffeine",
@@ -268,7 +268,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Good at moderate doses — tolerance, dependency, and sleep disruption at high doses",
     stacksWith: ["L-Theanine", "Rhodiola", "Alpha GPC"],
     bestFor: ["Energy", "Focus", "Reaction time", "Athletic performance"],
-    amazonUrl: "https://www.amazon.com/s?k=caffeine+l-theanine+stack&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=caffeine+l-theanine+stack&tag=nootropicstk-20",
   },
   {
     name: "Melatonin",
@@ -281,7 +281,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Excellent at low doses — grogginess if dosed too high; use lowest effective dose",
     stacksWith: ["Magnesium Glycinate", "L-Theanine", "Ashwagandha"],
     bestFor: ["Sleep", "Jet lag", "Circadian reset", "Recovery"],
-    amazonUrl: "https://www.amazon.com/s?k=melatonin+low+dose&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=melatonin+low+dose&tag=nootropicstk-20",
   },
   {
     name: "Vitamin D3",
@@ -294,7 +294,7 @@ const SUPPLEMENTS: SupplementData[] = [
     safetyProfile: "Excellent at standard doses — toxicity only at extremely high long-term doses",
     stacksWith: ["Omega-3 DHA", "Magnesium Glycinate", "Creatine"],
     bestFor: ["Mood", "Immune support", "Bone health", "Seasonal affect"],
-    amazonUrl: "https://www.amazon.com/s?k=vitamin+d3+k2+supplement&tag=nootropicstack-20",
+    amazonUrl: "https://www.amazon.com/s?k=vitamin+d3+k2+supplement&tag=nootropicstk-20",
   },
 ];
 
