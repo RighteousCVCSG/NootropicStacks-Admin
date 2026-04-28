@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import SupplementCard from "@/components/SupplementCard";
 import BuyBundleSheet from "@/components/BuyBundleSheet";
+import SupportPill from "@/components/SupportPill";
 import { useQuickStack } from "@/contexts/QuickStackContext";
 import { GOALS } from "../../../shared/affiliates";
 import { Brain, Search, Trash2, Save, Share2, Plus, X, ShoppingCart } from "lucide-react";
@@ -319,6 +320,9 @@ export default function StackBuilder() {
                   <p className="text-xs text-muted-foreground text-center">
                     Save & share require sign in. Buying does not.
                   </p>
+                )}
+                {stackItems.length > 0 && (
+                  <SupportPill variant="card" className="mt-3" />
                 )}
               </div>
             </div>

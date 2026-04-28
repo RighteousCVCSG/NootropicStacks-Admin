@@ -33,6 +33,7 @@ const learnLinks = [
   { href: "/research", label: "Research" },
   { href: "/faq", label: "FAQ" },
   { href: "/glossary", label: "Glossary" },
+  { href: "/support", label: "Support / Tip $1" },
 ];
 
 export default function Nav() {

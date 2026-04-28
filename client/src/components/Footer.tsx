@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { useLocation } from "wouter";
 import { Brain } from "lucide-react";
 
 const footerColumns = [
@@ -31,6 +31,7 @@ const footerColumns = [
       { href: "/library", label: "Supplement Library" },
       { href: "/guides", label: "Guides" },
       { href: "/compare-supplements", label: "Compare Supplements" },
+      { href: "/support", label: "Support / Tip $1" },
     ],
   },
 ];
@@ -52,20 +53,32 @@ const authoritativeSources = [
 ];
 
 export default function Footer() {
+  const [, setLocation] = useLocation();
+
+  const navigate = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setLocation(href);
+    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "auto" });
+  };
+
   return (
     <footer className="border-t border-border/50 bg-background mt-16">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand column */}
           <div className="flex flex-col gap-4">
-            <Link href="/" className="flex items-center gap-2 group w-fit">
+            <a
+              href="/"
+              onClick={(e) => navigate(e, "/")}
+              className="flex items-center gap-2 group w-fit"
+            >
               <div className="w-8 h-8 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
                 <Brain className="w-4 h-4 text-primary" />
               </div>
               <span className="font-display font-bold text-lg text-foreground">
                 Nootropic<span className="text-primary">Stacker</span>
               </span>
-            </Link>
+            </a>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Evidence-based nootropic research, stack building, and supplement guides to help you optimize your cognition.
             </p>
@@ -79,12 +92,13 @@ export default function Footer() {
               <ul className="flex flex-col gap-2">
                 {links.map(({ href, label }) => (
                   <li key={href}>
-                    <Link
+                    <a
                       href={href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      onClick={(e) => navigate(e, href)}
+                      className="block text-sm text-muted-foreground hover:text-foreground transition-colors py-1 cursor-pointer"
                     >
                       {label}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>

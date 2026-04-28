@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { SPONSORED_BANNERS } from "../../../shared/affiliates";
 import { Brain, Zap, ArrowRight, Star, Shield, ExternalLink, Layers, FlaskConical, Sparkles, Newspaper } from "lucide-react";
 import AffiliateBanner from "@/components/AffiliateBanner";
+import SupportPill from "@/components/SupportPill";
 
 const ENTRY_CARDS = [
   {
@@ -114,6 +115,9 @@ export default function Home() {
             <p className="mt-4 text-sm text-muted-foreground">
               Build a stack, compare vendors, and buy from trusted sellers — no signup required.
             </p>
+            <div className="mt-4 flex justify-center">
+              <SupportPill />
+            </div>
 
             {/* Stats row */}
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-md mx-auto">

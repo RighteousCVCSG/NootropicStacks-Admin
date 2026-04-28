@@ -26,6 +26,8 @@ import ComparisonPage from "./pages/ComparisonPage";
 import Videos from "./pages/Videos";
 import ResearchLibrary from "./pages/ResearchLibrary";
 import CelebrityStacks from "./pages/CelebrityStacks";
+import Support from "./pages/Support";
+import StarterGuide from "./pages/StarterGuide";
 import Nav from "./components/Nav";
 import AffiliateDisclosure from "./components/AffiliateDisclosure";
 import Footer from "./components/Footer";
@@ -60,6 +62,8 @@ function Router() {
         <Route path="/videos" component={Videos} />
         <Route path="/research" component={ResearchLibrary} />
         <Route path="/celebrity-stacks" component={CelebrityStacks} />
+        <Route path="/support" component={Support} />
+        <Route path="/starter-guide" component={StarterGuide} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
