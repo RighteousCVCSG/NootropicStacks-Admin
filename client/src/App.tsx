@@ -28,6 +28,7 @@ import ResearchLibrary from "./pages/ResearchLibrary";
 import Nav from "./components/Nav";
 import AffiliateDisclosure from "./components/AffiliateDisclosure";
 import Footer from "./components/Footer";
+import PixelBuddy from "./components/PixelBuddy";
 
 function Router() {
   return (
@@ -60,6 +61,7 @@ function Router() {
       </Switch>
       <AffiliateDisclosure />
       <Footer />
+      <PixelBuddy />
     </div>
   );
 }

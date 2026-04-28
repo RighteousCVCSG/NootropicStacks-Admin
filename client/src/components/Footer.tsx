@@ -133,14 +133,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Affiliate disclosure bar */}
-      <div className="border-t border-border/50 bg-secondary/30">
-        <div className="container py-3">
-          <p className="text-xs text-muted-foreground text-center">
-            Affiliate Disclosure: We earn commissions on purchases made through links on this site. Links are not endorsements.
-          </p>
-        </div>
-      </div>
     </footer>
   );
 }
