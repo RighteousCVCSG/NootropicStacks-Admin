@@ -27,13 +27,16 @@ const learnLinks = [
   { href: "/best-stacks", label: "Best Stacks" },
   { href: "/nootropics-for-focus", label: "Focus" },
   { href: "/nootropics-for-anxiety", label: "Anxiety" },
+  { href: "/celebrity-stacks", label: "Celebrity Stacks" },
   { href: "/reviews", label: "Reviews" },
+  { href: "/videos", label: "Videos" },
+  { href: "/research", label: "Research" },
   { href: "/faq", label: "FAQ" },
   { href: "/glossary", label: "Glossary" },
 ];
 
 export default function Nav() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const { user, isAuthenticated } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const logout = trpc.auth.logout.useMutation({
@@ -83,8 +86,12 @@ export default function Nav() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-48">
               {learnLinks.map(({ href, label }) => (
-                <DropdownMenuItem key={href} asChild>
-                  <Link href={href}>{label}</Link>
+                <DropdownMenuItem
+                  key={href}
+                  onSelect={() => setLocation(href)}
+                  className="cursor-pointer"
+                >
+                  {label}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>

@@ -5,22 +5,60 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { GOALS, SPONSORED_BANNERS } from "../../../shared/affiliates";
-import { Brain, Zap, ArrowRight, Star, Shield, ExternalLink, ChevronRight } from "lucide-react";
-import SupplementCard from "@/components/SupplementCard";
+import { SPONSORED_BANNERS } from "../../../shared/affiliates";
+import { Brain, Zap, ArrowRight, Star, Shield, ExternalLink, Layers, FlaskConical, Sparkles, Newspaper } from "lucide-react";
 import AffiliateBanner from "@/components/AffiliateBanner";
 
+const ENTRY_CARDS = [
+  {
+    href: "/builder",
+    icon: Layers,
+    label: "Stack Builder",
+    description: "Pick supplements, score the synergy, and buy each one — no signup.",
+    accent: "primary",
+  },
+  {
+    href: "/library",
+    icon: FlaskConical,
+    label: "Supplement Library",
+    description: "24+ research-backed nootropics with effect scores, doses, and vendors.",
+    accent: "blue",
+  },
+  {
+    href: "/best-stacks",
+    icon: Sparkles,
+    label: "Best Stacks",
+    description: "Goal-built protocols (focus, anxiety, sleep) — load any with one click.",
+    accent: "green",
+  },
+  {
+    href: "/celebrity-stacks",
+    icon: Star,
+    label: "Celebrity Stacks",
+    description: "Verified daily protocols from Huberman, Asprey, Rogan, and 5 more.",
+    accent: "amber",
+  },
+] as const;
+
+const ACCENT_CLASSES: Record<string, string> = {
+  primary: "border-primary/30 hover:border-primary/60 bg-primary/5 hover:bg-primary/10",
+  blue: "border-[oklch(0.78_0.15_200)/30] hover:border-[oklch(0.78_0.15_200)/60] bg-[oklch(0.78_0.15_200)/5] hover:bg-[oklch(0.78_0.15_200)/10]",
+  green: "border-[oklch(0.72_0.2_165)/30] hover:border-[oklch(0.72_0.2_165)/60] bg-[oklch(0.72_0.2_165)/5] hover:bg-[oklch(0.72_0.2_165)/10]",
+  amber: "border-[oklch(0.78_0.18_75)/30] hover:border-[oklch(0.78_0.18_75)/60] bg-[oklch(0.78_0.18_75)/5] hover:bg-[oklch(0.78_0.18_75)/10]",
+};
+
+const ICON_ACCENT: Record<string, string> = {
+  primary: "text-primary",
+  blue: "text-[oklch(0.78_0.15_200)]",
+  green: "text-[oklch(0.72_0.2_165)]",
+  amber: "text-[oklch(0.78_0.18_75)]",
+};
+
 export default function Home() {
-  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [leadSubmitted, setLeadSubmitted] = useState(false);
 
-  const featuredQuery = trpc.supplements.list.useQuery({ featured: true, limit: 6 });
-  const recommendQuery = trpc.supplements.recommend.useQuery(
-    { goals: selectedGoals, limit: 6 },
-    { enabled: selectedGoals.length > 0 }
-  );
   const subscribeMutation = trpc.leads.subscribe.useMutation({
     onSuccess: () => {
       setLeadSubmitted(true);
@@ -28,16 +66,6 @@ export default function Home() {
     },
     onError: () => toast.error("Something went wrong. Please try again."),
   });
-
-  const toggleGoal = (id: string) => {
-    setSelectedGoals((prev) =>
-      prev.includes(id) ? prev.filter((g) => g !== id) : [...prev, id]
-    );
-  };
-
-  const displayedSupplements = selectedGoals.length > 0
-    ? recommendQuery.data ?? []
-    : featuredQuery.data?.items ?? [];
 
   const handleLeadSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,85 +132,83 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Goal Selector ────────────────────────────────────────────────── */}
+      {/* ─── Explore the App ──────────────────────────────────────────────── */}
       <section className="py-16 border-y border-border/50">
         <div className="container">
           <div className="text-center mb-10">
             <h2 className="font-display text-3xl font-bold text-foreground mb-3">
-              What are your goals?
+              Where do you want to start?
             </h2>
-            <p className="text-muted-foreground">
-              Select one or more goals to get personalized supplement recommendations.
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Pick the door that fits your moment. The whole app is open without signup.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 max-w-4xl mx-auto">
-            {GOALS.map((goal) => {
-              const isSelected = selectedGoals.includes(goal.id);
-              return (
-                <button
-                  key={goal.id}
-                  onClick={() => toggleGoal(goal.id)}
-                  className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all duration-200 ${
-                    isSelected
-                      ? "border-primary/60 bg-primary/10 shadow-lg shadow-primary/10"
-                      : "border-border/50 bg-card hover:border-border hover:bg-secondary/50"
-                  }`}
-                >
-                  <span className="text-2xl">{goal.icon}</span>
-                  <span className={`text-xs font-semibold ${isSelected ? "text-primary" : "text-muted-foreground"}`}>
-                    {goal.label}
-                  </span>
-                </button>
-              );
-            })}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {ENTRY_CARDS.map(({ href, icon: Icon, label, description, accent }) => (
+              <Link
+                key={href}
+                href={href}
+                className={`group flex flex-col gap-3 p-6 rounded-xl border transition-all duration-200 ${ACCENT_CLASSES[accent]}`}
+              >
+                <div className="flex items-center justify-between">
+                  <Icon className={`w-6 h-6 ${ICON_ACCENT[accent]}`} />
+                  <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
+                </div>
+                <h3 className="font-display text-lg font-semibold text-foreground">{label}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
+              </Link>
+            ))}
           </div>
-          {selectedGoals.length > 0 && (
-            <div className="text-center mt-6">
-              <p className="text-sm text-muted-foreground">
-                Showing top supplements for:{" "}
-                <span className="text-primary font-medium">
-                  {selectedGoals.map((g) => GOALS.find((x) => x.id === g)?.label).join(", ")}
-                </span>
-              </p>
-            </div>
-          )}
         </div>
       </section>
 
-      {/* ─── Featured / Recommended Supplements ──────────────────────────── */}
+      {/* ─── Editorial Showcases ──────────────────────────────────────────── */}
       <section className="py-16">
         <div className="container">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="font-display text-2xl font-bold text-foreground">
-                {selectedGoals.length > 0 ? "Recommended For You" : "Featured Supplements"}
-              </h2>
-              <p className="text-muted-foreground text-sm mt-1">
-                {selectedGoals.length > 0
-                  ? "Top-scoring supplements for your selected goals"
-                  : "Editor-selected, research-backed nootropics"}
-              </p>
-            </div>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/library" className="flex items-center gap-1">
-                View All <ChevronRight className="w-4 h-4" />
-              </Link>
-            </Button>
+          <div className="text-center mb-10">
+            <h2 className="font-display text-2xl font-bold text-foreground">Featured this month</h2>
+            <p className="text-muted-foreground text-sm mt-1">Quick reads — no clicking around required.</p>
           </div>
-
-          {(featuredQuery.isLoading || (selectedGoals.length > 0 && recommendQuery.isLoading)) ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="h-64 rounded-xl bg-card border border-border/50 animate-pulse" />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {displayedSupplements.map((supp) => (
-                <SupplementCard key={supp.id} supplement={supp} />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              {
+                href: "/best-nootropics",
+                tag: "Editorial",
+                title: "The 5 Best Nootropics in 2026",
+                desc: "Our shortlist after reviewing 24+ supplements head-to-head.",
+              },
+              {
+                href: "/guides/mind-lab-pro-review",
+                tag: "Review",
+                title: "Mind Lab Pro: 11 Ingredients, Honest Verdict",
+                desc: "Why this is the most-recommended pre-built stack on the site.",
+              },
+              {
+                href: "/research",
+                tag: "Library",
+                title: "15 Curated Studies on Nootropics",
+                desc: "PubMed-cited research summaries for the supplements we cover.",
+              },
+            ].map(({ href, tag, title, desc }) => (
+              <Link
+                key={href}
+                href={href}
+                className="group flex flex-col gap-2 p-5 rounded-xl border border-border/50 bg-card hover:border-border hover:bg-card/80 transition-colors"
+              >
+                <Badge variant="outline" className="self-start text-xs border-border/50 text-muted-foreground">
+                  <Newspaper className="w-3 h-3 mr-1" />
+                  {tag}
+                </Badge>
+                <h3 className="font-display font-semibold text-foreground group-hover:text-primary transition-colors">
+                  {title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+                <span className="text-sm text-primary mt-auto pt-2 inline-flex items-center gap-1">
+                  Read <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
