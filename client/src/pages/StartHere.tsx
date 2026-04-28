@@ -109,7 +109,7 @@ export default function StartHere() {
 
   const handleBuy = (url: string, partner: string, supplement: string) => {
     window.open(url, "_blank");
-    trackClick.mutate({ supplementSlug: supplement, affiliatePartner: partner, page: "start-here" });
+    trackClick.mutate({ supplementSlug: supplement, affiliatePartner: partner, destinationUrl: url, referrer: "start-here" });
   };
 
   return (

@@ -23,6 +23,8 @@ import Reviews from "./pages/Reviews";
 import FAQ from "./pages/FAQ";
 import Glossary from "./pages/Glossary";
 import ComparisonPage from "./pages/ComparisonPage";
+import Videos from "./pages/Videos";
+import ResearchLibrary from "./pages/ResearchLibrary";
 import Nav from "./components/Nav";
 import AffiliateDisclosure from "./components/AffiliateDisclosure";
 import Footer from "./components/Footer";
@@ -51,6 +53,8 @@ function Router() {
         <Route path="/faq" component={FAQ} />
         <Route path="/glossary" component={Glossary} />
         <Route path="/compare-supplements" component={ComparisonPage} />
+        <Route path="/videos" component={Videos} />
+        <Route path="/research" component={ResearchLibrary} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>

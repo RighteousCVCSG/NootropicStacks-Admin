@@ -140,7 +140,7 @@ export default function BestNootropics() {
 
   const handleBuy = (url: string, partner: string, supplement: string) => {
     window.open(url, "_blank");
-    trackClick.mutate({ supplementSlug: supplement, affiliatePartner: partner, page: "best-nootropics" });
+    trackClick.mutate({ supplementSlug: supplement, affiliatePartner: partner, destinationUrl: url, referrer: "best-nootropics" });
   };
 
   return (

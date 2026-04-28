@@ -16,6 +16,8 @@ const footerColumns = [
     heading: "Resources",
     links: [
       { href: "/blog", label: "Blog" },
+      { href: "/research", label: "Research Library" },
+      { href: "/videos", label: "Video Library" },
       { href: "/reviews", label: "Product Reviews" },
       { href: "/faq", label: "FAQ" },
       { href: "/glossary", label: "Glossary" },
@@ -30,6 +32,22 @@ const footerColumns = [
       { href: "/compare-supplements", label: "Compare Supplements" },
     ],
   },
+];
+
+const redditCommunities = [
+  { href: "https://www.reddit.com/r/nootropics/", label: "r/nootropics" },
+  { href: "https://www.reddit.com/r/biohacking/", label: "r/biohacking" },
+  { href: "https://www.reddit.com/r/supplements/", label: "r/supplements" },
+  { href: "https://www.reddit.com/r/longevity/", label: "r/longevity" },
+  { href: "https://www.reddit.com/r/ADHD/", label: "r/ADHD" },
+];
+
+const authoritativeSources = [
+  { href: "https://pubmed.ncbi.nlm.nih.gov/", label: "PubMed / NCBI" },
+  { href: "https://examine.com/", label: "Examine.com" },
+  { href: "https://www.mdpi.com/journal/nutrients", label: "Nutrients Journal" },
+  { href: "https://academic.oup.com/jn", label: "Journal of Nutrition" },
+  { href: "https://www.frontiersin.org/journals/nutrition", label: "Frontiers in Nutrition" },
 ];
 
 export default function Footer() {
@@ -71,6 +89,47 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+        </div>
+
+        {/* Community & Sources row */}
+        <div className="mt-10 pt-8 border-t border-border/30 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Reddit Communities */}
+          <div className="flex flex-col gap-3">
+            <h4 className="text-sm font-semibold text-foreground">Community</h4>
+            <ul className="flex flex-wrap gap-2">
+              {redditCommunities.map(({ href, label }) => (
+                <li key={href}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-muted-foreground hover:text-orange-400 transition-colors bg-secondary/40 border border-border/30 rounded px-2 py-1"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Authoritative Sources */}
+          <div className="flex flex-col gap-3">
+            <h4 className="text-sm font-semibold text-foreground">Research Sources</h4>
+            <ul className="flex flex-wrap gap-2">
+              {authoritativeSources.map(({ href, label }) => (
+                <li key={href}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-muted-foreground hover:text-primary transition-colors bg-secondary/40 border border-border/30 rounded px-2 py-1"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
