@@ -1,0 +1,209 @@
+import { useState, useMemo, useRef } from "react";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { ArrowRight, Search, BookOpen } from "lucide-react";
+
+const GLOSSARY_TERMS: { term: string; definition: string }[] = [
+  { term: "Acetylcholine", definition: "A key neurotransmitter involved in memory, learning, and attention. Many nootropics work by raising acetylcholine levels or preventing its breakdown in the synapse." },
+  { term: "Adaptogen", definition: "A class of herbs and compounds that help the body resist physical, chemical, and biological stressors. Examples include Ashwagandha, Rhodiola Rosea, and Panax Ginseng." },
+  { term: "Adrafinil", definition: "A prodrug to Modafinil that is metabolized in the liver. Formerly sold OTC as a wakefulness agent; discontinued by its manufacturer but still circulates as a research chemical." },
+  { term: "Alpha GPC", definition: "Alpha-glycerophosphocholine — a highly bioavailable choline source that readily crosses the blood-brain barrier, directly raising acetylcholine levels. Often dosed at 300–600mg for cognitive enhancement." },
+  { term: "Ampakine", definition: "A subtype of compound that positively modulates AMPA receptors, enhancing glutamate transmission and potentially improving memory and alertness. Sunifiram and some racetams have ampakine-like properties." },
+  { term: "AMPA Receptor", definition: "A type of ionotropic glutamate receptor involved in fast synaptic transmission. AMPA receptor potentiation is associated with enhanced memory formation and synaptic plasticity." },
+  { term: "Anxiolytic", definition: "A substance that reduces anxiety. Several nootropics have anxiolytic properties — including L-Theanine, Ashwagandha, Bacopa Monnieri, Magnesium, and GABA." },
+  { term: "Ashwagandha", definition: "Withania somnifera — an Ayurvedic adaptogen with robust clinical evidence for reducing cortisol, lowering anxiety, and improving sleep quality. KSM-66 and Sensoril are the most studied standardized extracts." },
+  { term: "ATP", definition: "Adenosine triphosphate — the primary energy currency of cells. Mitochondrial support nootropics (CoQ10, creatine, NMN) enhance ATP production, reducing mental fatigue." },
+  { term: "Bacopa Monnieri", definition: "An Ayurvedic herb with some of the strongest clinical evidence for memory enhancement. Active compounds (bacosides) improve memory consolidation and reduce anxiety after 8–12 weeks of consistent use." },
+  { term: "Bioavailability", definition: "The fraction of an ingested substance that reaches systemic circulation in an active form. Higher bioavailability means more of a dose is actually utilized by the body. Fat-soluble nootropics generally have higher bioavailability when taken with food." },
+  { term: "Blood-Brain Barrier", definition: "A selective membrane that separates the circulating blood from the brain's extracellular fluid. Many compounds cannot cross it — a key factor in determining whether a supplement can have direct brain effects." },
+  { term: "CDP-Choline", definition: "Cytidine 5-diphosphocholine — a choline precursor that also provides cytidine, which converts to uridine in the body. Often used interchangeably with Citicoline. Supports acetylcholine and dopamine production." },
+  { term: "Choline", definition: "An essential nutrient that serves as a precursor to acetylcholine. Adequate dietary choline is critical for cognitive function; most people are mildly deficient. Supplemental forms include Alpha GPC, CDP-Choline, and choline bitartrate." },
+  { term: "Citicoline", definition: "CDP-Choline — a bioavailable choline form that raises acetylcholine and supports neuronal membrane integrity. Used at 250–500mg, it is one of the best-studied cognitive enhancers with strong safety data." },
+  { term: "Cognitive Enhancement", definition: "Any intervention that improves cognitive function above an individual's baseline. Encompasses memory, attention, processing speed, creativity, and executive function. Nootropics are one category of cognitive enhancement interventions." },
+  { term: "Cortisol", definition: "The primary stress hormone, released by the adrenal glands in response to stress. Chronically elevated cortisol impairs hippocampal function, memory, and mood. Several adaptogens (Ashwagandha, Rhodiola) reduce cortisol levels." },
+  { term: "Creatine", definition: "A naturally occurring compound primarily known for athletic performance; also a legitimate nootropic. The brain uses creatine phosphate for rapid ATP regeneration. 3–5g/day improves working memory, reasoning, and performance under fatigue." },
+  { term: "Cycling", definition: "The practice of taking scheduled breaks from a supplement to prevent tolerance, maintain receptor sensitivity, or allow hormonal systems to reset. Typically involves periods on and off the supplement (e.g., 4 weeks on / 1 week off)." },
+  { term: "Dopamine", definition: "A neurotransmitter involved in motivation, reward, pleasure, and executive function. Precursors like L-Tyrosine and N-Acetyl L-Tyrosine support dopamine synthesis under stress." },
+  { term: "Dosing", definition: "The amount and frequency of a supplement taken. Optimal dosing varies by compound, individual, and goal. Clinical doses from published studies are the best starting reference; always begin at the lower end." },
+  { term: "Efficacy", definition: "The ability of a substance to produce a desired effect under controlled conditions. A compound can have good efficacy in trials but low effectiveness in real-world use due to bioavailability, compliance, or individual variation." },
+  { term: "Ergogenic", definition: "A substance that enhances physical or mental performance. While the term is most common in athletics (caffeine, creatine), it applies broadly to cognitive enhancers in the nootropic context." },
+  { term: "Evidence-Based", definition: "Supported by peer-reviewed clinical research, ideally randomized controlled trials. In the nootropic space, compounds like Bacopa Monnieri, L-Theanine, and Lion's Mane have the strongest evidence-based profiles." },
+  { term: "GABA", definition: "Gamma-aminobutyric acid — the brain's primary inhibitory neurotransmitter. Supplemental GABA may reduce anxiety and promote relaxation, though debate exists about its ability to cross the blood-brain barrier directly." },
+  { term: "Half-Life", definition: "The time required for the concentration of a substance in the body to reduce by half. Relevant for determining dosing frequency and timing. Caffeine's half-life is ~5 hours; Huperzine A's is ~10–14 hours." },
+  { term: "Herbal Nootropic", definition: "A plant-derived compound used for cognitive enhancement. Includes Bacopa Monnieri, Lion's Mane, Rhodiola Rosea, Ashwagandha, Ginkgo Biloba, and Panax Ginseng. Often slower-acting but well-tolerated with cumulative benefits." },
+  { term: "HPA Axis", definition: "The hypothalamic-pituitary-adrenal axis — the neuroendocrine system that controls stress response and cortisol release. Adaptogens like Ashwagandha and Rhodiola modulate HPA axis activity to reduce stress reactivity." },
+  { term: "Huperzine A", definition: "A compound derived from Chinese club moss that inhibits acetylcholinesterase, the enzyme that breaks down acetylcholine. Effective for memory enhancement; typically cycled 2 weeks on/off due to its long half-life." },
+  { term: "Lion's Mane", definition: "Hericium erinaceus — a medicinal mushroom that stimulates Nerve Growth Factor (NGF) and BDNF, supporting neuroplasticity and long-term brain health. Growing clinical evidence for cognitive and mood benefits. Effects are cumulative over 4–8 weeks." },
+  { term: "L-Theanine", definition: "An amino acid found naturally in green tea that promotes relaxed alertness by increasing alpha brain wave activity. When paired with caffeine (2:1 ratio), it reduces jitteriness while enhancing focus. Non-sedating at standard doses." },
+  { term: "Magnesium", definition: "An essential mineral involved in over 300 enzymatic processes, including synaptic plasticity and NMDA receptor function. Deficiency is associated with anxiety, poor sleep, and cognitive decline. Glycinate and L-Threonate are the preferred supplemental forms." },
+  { term: "Melatonin", definition: "A hormone produced by the pineal gland that regulates sleep-wake cycles. Supplemental melatonin (0.5–3mg) can help reset circadian rhythms. Indirectly supports cognitive performance by improving sleep quality." },
+  { term: "Mitochondria", definition: "The organelles responsible for cellular energy production (ATP). Mitochondrial dysfunction is associated with cognitive decline. Nootropics like CoQ10, PQQ, and NMN support mitochondrial health and energy production." },
+  { term: "Modafinil", definition: "A prescription wakefulness-promoting agent (schedule IV in the US) originally developed for narcolepsy. Often discussed in nootropic contexts for its focus and alertness effects. Not available OTC; significant regulatory and side-effect profile to consider." },
+  { term: "NAD+", definition: "Nicotinamide adenine dinucleotide — a coenzyme critical for cellular energy metabolism and DNA repair. NAD+ levels decline with age. Precursors like NMN and NR are popular anti-aging and cognitive health supplements." },
+  { term: "NGF", definition: "Nerve Growth Factor — a protein that promotes the growth, maintenance, and survival of neurons. Lion's Mane mushroom stimulates NGF production, making it one of the few supplements with direct neurogenesis implications." },
+  { term: "Neuroplasticity", definition: "The brain's ability to reorganize, form new connections, and adapt in response to learning or experience. Several nootropics (Lion's Mane, Bacopa, Omega-3 DHA) support neuroplasticity through NGF, BDNF, and membrane fluidity." },
+  { term: "Neurotransmitter", definition: "A chemical messenger that transmits signals across synapses between neurons. Key neurotransmitters targeted by nootropics include acetylcholine (memory/focus), dopamine (motivation), serotonin (mood), and GABA (inhibition/calm)." },
+  { term: "NFkB", definition: "Nuclear Factor kappa B — a transcription factor involved in inflammation and immune response. Some nootropics (Lion's Mane, Ashwagandha, Bacopa) have anti-inflammatory effects partly through NFkB pathway modulation." },
+  { term: "NMN", definition: "Nicotinamide mononucleotide — a precursor to NAD+ with growing interest as a longevity and cognitive health supplement. Animal studies show strong benefits; human trials are emerging but promising for energy metabolism and DNA repair." },
+  { term: "Noopept", definition: "A synthetic peptide nootropic (not a racetam despite common misconception) developed in Russia. Claimed to have effects similar to piracetam at much lower doses. Works on AMPA receptors and stimulates BDNF/NGF. Limited but positive clinical evidence." },
+  { term: "Nootropic", definition: "Any substance that enhances cognitive function while having very low toxicity and side effects. The term was coined by Dr. Corneliu Giurgea in 1972. Encompasses natural herbs, synthetic compounds, vitamins, and lifestyle interventions." },
+  { term: "Omega-3", definition: "Essential fatty acids — particularly DHA and EPA — that are structural components of brain cell membranes. DHA is the most abundant fatty acid in the brain. Low Omega-3 status is associated with cognitive decline, depression, and impaired neuroplasticity." },
+  { term: "Oxiracetam", definition: "A racetam family member considered more stimulating than piracetam. Acts on AMPA and NMDA receptors, potentially enhancing memory and logical reasoning. Poorly studied in humans; used largely based on animal and anecdotal data." },
+  { term: "Phosphatidylserine", definition: "A phospholipid that maintains neuronal cell membrane fluidity and integrity. Clinical trials support benefits for memory, cognitive decline, and stress reduction. One of the few nootropics with an FDA-qualified health claim." },
+  { term: "Piracetam", definition: "The original racetam, synthesized in 1964. Modulates AMPA receptors and improves membrane fluidity. Has the most clinical data of all racetams, with benefits for age-related cognitive decline, though effects in healthy young adults are modest." },
+  { term: "Placebo", definition: "An inert substance used as a control in clinical trials. A significant proportion of nootropic effects in poorly-controlled studies may be placebo-driven — making double-blind, placebo-controlled trials the gold standard for evaluating efficacy." },
+  { term: "Polyphenol", definition: "Plant-derived antioxidant compounds with neuroprotective properties. Examples include resveratrol (grapes), curcumin (turmeric), EGCG (green tea), and pterostilbene (blueberries). Many act through antioxidant and anti-inflammatory pathways." },
+  { term: "Precursor", definition: "A compound that is converted into a target molecule in the body. For example, L-Tyrosine is a precursor to dopamine; Alpha GPC is a precursor to acetylcholine; NMN is a precursor to NAD+. Precursor dosing can support neurotransmitter synthesis." },
+  { term: "Racetam", definition: "A family of synthetic nootropics sharing a pyrrolidone nucleus, including piracetam, aniracetam, oxiracetam, and pramiracetam. Generally modulate AMPA receptors and acetylcholine activity. Often require choline supplementation to prevent headaches." },
+  { term: "Rhodiola", definition: "Rhodiola Rosea — a Scandinavian adaptogen with strong evidence for reducing mental fatigue, improving performance under stress, and supporting mood. Active compounds rosavins and salidroside are responsible for its effects. Best taken in the morning." },
+  { term: "Serotonin", definition: "A neurotransmitter regulating mood, appetite, and sleep. While 5-HTP and tryptophan directly raise serotonin, most traditional nootropics avoid direct serotonergic manipulation due to interaction risks. Adaptogens may modulate serotonin indirectly." },
+  { term: "Smart Drug", definition: "A colloquial term for prescription and synthetic compounds used off-label for cognitive enhancement — including Modafinil, Adderall, and Ritalin. Distinct from traditional nootropics due to higher potency, side effects, and regulatory status." },
+  { term: "Stack", definition: "A combination of two or more supplements taken together to achieve complementary cognitive effects. Good stacks leverage synergies between compounds targeting different mechanisms, while avoiding redundancy or adverse interactions." },
+  { term: "Standardized Extract", definition: "An herbal preparation that is concentrated and calibrated to contain a specified percentage of active compounds. For example, Bacopa standardized to 50% bacosides, or Ashwagandha standardized to 5% withanolides. More reliable and comparable across products than raw herb powder." },
+  { term: "Stim", definition: "Short for stimulant — a compound that increases alertness, energy, and heart rate by activating the sympathetic nervous system. Caffeine is the most common stim; others include synephrine, yohimbine, and guarana. Stims can have tolerance, dependency, and cardiovascular effects." },
+  { term: "Synergy", definition: "When two or more compounds produce an effect greater than the sum of their individual effects. Classic nootropic synergies include L-Theanine + Caffeine, Alpha GPC + Lion's Mane, and Bacopa + Phosphatidylserine." },
+  { term: "Tolerance", definition: "A reduction in a substance's effect following repeated exposure, requiring higher doses to achieve the same effect. Common with caffeine and racetams. Cycling protocols help prevent tolerance buildup for susceptible compounds." },
+  { term: "Verum", definition: "The active treatment in a clinical trial (as opposed to placebo). In nootropic research, verum groups receiving an active compound are compared to placebo groups to isolate true pharmacological effects." },
+  { term: "Washout Period", definition: "A period of abstinence from a substance — either between cycling phases or between the end of one clinical study arm and the start of another — to allow the compound to clear the body and restore baseline function." },
+];
+
+function groupByLetter(terms: typeof GLOSSARY_TERMS) {
+  const map: Record<string, typeof GLOSSARY_TERMS> = {};
+  for (const t of terms) {
+    const letter = t.term[0].toUpperCase();
+    if (!map[letter]) map[letter] = [];
+    map[letter].push(t);
+  }
+  return map;
+}
+
+export default function Glossary() {
+  const [search, setSearch] = useState("");
+  const letterRefs = useRef<Record<string, HTMLElement | null>>({});
+
+  const filtered = useMemo(() => {
+    if (!search.trim()) return GLOSSARY_TERMS;
+    const q = search.toLowerCase();
+    return GLOSSARY_TERMS.filter(
+      (t) => t.term.toLowerCase().includes(q) || t.definition.toLowerCase().includes(q)
+    );
+  }, [search]);
+
+  const grouped = useMemo(() => groupByLetter(filtered), [filtered]);
+  const letters = Object.keys(grouped).sort();
+
+  const allLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+  function scrollToLetter(letter: string) {
+    const el = letterRefs.current[letter];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  return (
+    <main className="min-h-screen py-12">
+      <div className="container">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-8">
+          {/* Main content */}
+          <div>
+            {/* Hero */}
+            <div className="mb-8">
+              <div className="flex items-center gap-2 mb-3">
+                <BookOpen className="w-5 h-5 text-primary" />
+                <Badge className="bg-primary/15 text-primary border-primary/30 text-xs">Reference</Badge>
+              </div>
+              <h1 className="font-display text-4xl font-bold text-foreground mb-3">
+                Nootropics Glossary — 60+ Terms Explained
+              </h1>
+              <p className="text-muted-foreground leading-relaxed">
+                A complete reference guide to nootropics terminology — from acetylcholine to washout
+                periods.
+              </p>
+            </div>
+
+            {/* Search */}
+            <div className="relative mb-8">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search terms or definitions..."
+                className="pl-9 bg-card border-border/50"
+              />
+            </div>
+
+            {/* Letter groups */}
+            {letters.length === 0 ? (
+              <p className="text-muted-foreground text-sm">No terms match your search.</p>
+            ) : (
+              <div className="space-y-10">
+                {letters.map((letter) => (
+                  <section
+                    key={letter}
+                    id={`letter-${letter}`}
+                    ref={(el) => { letterRefs.current[letter] = el; }}
+                  >
+                    <h2 className="font-display text-2xl font-bold text-primary mb-4 border-b border-border/30 pb-2">
+                      {letter}
+                    </h2>
+                    <div className="space-y-4">
+                      {grouped[letter].map((t) => (
+                        <div key={t.term} className="group">
+                          <span className="font-semibold text-foreground">{t.term}</span>
+                          <span className="text-muted-foreground text-sm"> — {t.definition}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            )}
+
+            {/* CTA */}
+            <div className="mt-14 p-6 rounded-xl border border-border/50 bg-card text-center">
+              <h2 className="font-display text-xl font-bold text-foreground mb-2">
+                Put these terms to work
+              </h2>
+              <p className="text-sm text-muted-foreground mb-5">
+                Use our stack builder to create a personalized protocol based on your goals.
+              </p>
+              <Link href="/builder">
+                <Button size="sm" className="gap-1.5">
+                  Build Your Stack <ArrowRight className="w-3.5 h-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Sticky letter nav */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-8">
+              <p className="text-xs text-muted-foreground font-medium mb-3 uppercase tracking-wide">
+                Jump to
+              </p>
+              <div className="grid grid-cols-2 gap-1">
+                {allLetters.map((letter) => {
+                  const available = !!grouped[letter];
+                  return (
+                    <button
+                      key={letter}
+                      onClick={() => available && scrollToLetter(letter)}
+                      className={`text-xs py-1 px-2 rounded text-center transition-colors ${
+                        available
+                          ? "text-primary hover:bg-primary/10 cursor-pointer font-medium"
+                          : "text-muted-foreground/30 cursor-default"
+                      }`}
+                    >
+                      {letter}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+  );
+}
