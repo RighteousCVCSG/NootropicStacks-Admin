@@ -127,10 +127,10 @@ export default function Nav() {
           ) : (
             <>
               <Button variant="ghost" size="sm" asChild>
-                <a href={getLoginUrl()}>Sign In</a>
+                <Link href="/library">Explore</Link>
               </Button>
               <Button size="sm" className="glow-green" asChild>
-                <a href={getLoginUrl()}>Build Your Stack</a>
+                <Link href="/builder">Build Your Stack</Link>
               </Button>
             </>
           )}
@@ -194,10 +194,10 @@ export default function Nav() {
               ) : (
                 <>
                   <Button variant="outline" size="sm" asChild>
-                    <a href={getLoginUrl()}>Sign In</a>
+                    <Link href="/library" onClick={() => setMobileOpen(false)}>Explore</Link>
                   </Button>
                   <Button size="sm" className="glow-green" asChild>
-                    <a href={getLoginUrl()}>Build Your Stack</a>
+                    <Link href="/builder" onClick={() => setMobileOpen(false)}>Build Your Stack</Link>
                   </Button>
                 </>
               )}

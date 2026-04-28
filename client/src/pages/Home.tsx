@@ -324,55 +324,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Footer ───────────────────────────────────────────────────────── */}
-      <footer className="py-12 border-t border-border/50">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Brain className="w-5 h-5 text-primary" />
-                <span className="font-display font-bold text-foreground">NootropicStacker</span>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                The most comprehensive nootropic stack builder for biohackers and cognitive optimizers.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground mb-3 text-sm">Explore</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/library" className="hover:text-foreground transition-colors">Supplement Library</Link></li>
-                <li><Link href="/builder" className="hover:text-foreground transition-colors">Stack Builder</Link></li>
-                <li><Link href="/guides" className="hover:text-foreground transition-colors">Stack Guides</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground mb-3 text-sm">Top Vendors</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="https://nootropicsdepot.com/?rfsn=supplement-stacker" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Nootropics Depot</a></li>
-                <li><a href="https://www.mindlabpro.com/?a_aid=nootropicstacker" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Mind Lab Pro</a></li>
-                <li><a href="https://neurohacker.com/?rfsn=supplement-stacker" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Neurohacker Collective</a></li>
-                <li><a href="https://www.thorne.com/?ref=nootropicstacker" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Thorne</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground mb-3 text-sm">Legal</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><span className="cursor-default">Affiliate Disclosure</span></li>
-                <li><span className="cursor-default">Privacy Policy</span></li>
-                <li><span className="cursor-default">Terms of Use</span></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-border/50 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <p className="text-xs text-muted-foreground">
-              © 2026 NootropicStacker.com · All rights reserved
-            </p>
-            <p className="text-xs text-muted-foreground max-w-md text-center sm:text-right">
-              <strong>Affiliate Disclosure:</strong> This site contains affiliate links. We may earn a commission when you purchase through our links at no extra cost to you.
-            </p>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

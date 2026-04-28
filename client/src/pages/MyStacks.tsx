@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
@@ -9,6 +9,7 @@ import { Brain, Plus, Trash2, Share2, Lock, Globe, ChevronRight } from "lucide-r
 
 export default function MyStacks() {
   const { isAuthenticated, loading } = useAuth();
+  const [, navigate] = useLocation();
   const utils = trpc.useUtils();
 
   const stacksQuery = trpc.stacks.list.useQuery(undefined, {
@@ -98,7 +99,8 @@ export default function MyStacks() {
             {stacksQuery.data?.map((stack) => (
               <div
                 key={stack.id}
-                className="flex items-center justify-between p-5 rounded-xl border border-border/50 bg-card card-hover group"
+                className="flex items-center justify-between p-5 rounded-xl border border-border/50 bg-card card-hover group cursor-pointer"
+                onClick={() => navigate("/builder")}
               >
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
@@ -124,7 +126,8 @@ export default function MyStacks() {
                       variant="ghost"
                       size="sm"
                       className="text-muted-foreground hover:text-foreground"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         navigator.clipboard.writeText(`${window.location.origin}/stacks/${stack.shareToken}`);
                         toast.success("Share link copied!");
                       }}
@@ -136,7 +139,8 @@ export default function MyStacks() {
                     variant="ghost"
                     size="sm"
                     className="text-muted-foreground hover:text-destructive"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       if (confirm("Delete this stack?")) {
                         deleteStack.mutate({ id: stack.id });
                       }
