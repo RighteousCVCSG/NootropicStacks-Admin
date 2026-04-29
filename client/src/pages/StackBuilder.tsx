@@ -11,6 +11,7 @@ import SupplementCard from "@/components/SupplementCard";
 import BuyBundleSheet from "@/components/BuyBundleSheet";
 import SupportPill from "@/components/SupportPill";
 import { useQuickStack } from "@/contexts/QuickStackContext";
+import { track } from "@/lib/analytics";
 import { GOALS } from "../../../shared/affiliates";
 import { Brain, Search, Trash2, Save, Share2, Plus, X, ShoppingCart } from "lucide-react";
 
@@ -73,6 +74,12 @@ export default function StackBuilder() {
       setSavedStackId(data.id);
       setShareToken(data.shareToken);
       toast.success("Stack saved successfully!");
+      track("stack_save", {
+        stack_id: data.id,
+        item_count: stackItems.length,
+        is_public: isPublic,
+        has_goal: Boolean(stackGoal),
+      });
     },
     onError: () => toast.error("Failed to save stack. Please try again."),
   });

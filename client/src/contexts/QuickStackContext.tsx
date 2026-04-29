@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
+import { track } from "@/lib/analytics";
 
 export interface StackItem {
   slug: string;
@@ -125,6 +126,7 @@ export function QuickStackProvider({ children }: QuickStackProviderProps) {
     setItems(prev => {
       if (prev.some(p => p.slug === item.slug)) return prev;
       toast.success("Added to stack!", { description: item.name });
+      track("stack_add", { slug: item.slug, name: item.name, stack_size: prev.length + 1 });
       return [...prev, item];
     });
   }, []);

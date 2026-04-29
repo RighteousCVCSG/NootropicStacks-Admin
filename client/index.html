@@ -31,11 +31,16 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- Google Analytics 4 -->
+    <!-- Plausible Analytics (primary) — see decision-log.md 2026-04-29 -->
+    <!-- outbound-links plugin captures external clicks; tagged-events allows custom events via window.plausible() -->
+    <script defer data-domain="nootropicstacker.com" src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    <!-- Google Analytics 4 (transitional, see decision-log.md) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FZEY2PKWFQ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
       gtag('js', new Date());
       gtag('config', 'G-FZEY2PKWFQ');
     </script>

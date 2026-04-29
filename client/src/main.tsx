@@ -7,7 +7,10 @@ import { createRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
 import { getLoginUrl } from "./const";
+import { installAffiliateClickTracking } from "./lib/analytics";
 import "./index.css";
+
+installAffiliateClickTracking();
 
 const queryClient = new QueryClient();
 

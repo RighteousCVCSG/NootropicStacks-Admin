@@ -15,6 +15,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { getRecentArticlesMeta, type ArticleMeta } from "@/data/blogArticlesIndex";
+import { track } from "@/lib/analytics";
 
 interface ArticleSection {
   heading: string | null;
@@ -87,8 +88,10 @@ export default function BlogArticle() {
         body: JSON.stringify({ email }),
       });
       setSubscribed(true);
+      track("email_signup", { source: "blog_inline", article: slug });
     } catch {
       setSubscribed(true); // optimistic — don't show error on newsletter
+      track("email_signup", { source: "blog_inline", article: slug, optimistic: true });
     } finally {
       setSubscribing(false);
     }

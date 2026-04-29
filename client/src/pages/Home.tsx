@@ -9,6 +9,7 @@ import { SPONSORED_BANNERS } from "../../../shared/affiliates";
 import { Brain, Zap, ArrowRight, Star, Shield, ExternalLink, Layers, FlaskConical, Sparkles, Newspaper } from "lucide-react";
 import AffiliateBanner from "@/components/AffiliateBanner";
 import SupportPill from "@/components/SupportPill";
+import { track } from "@/lib/analytics";
 
 const ENTRY_CARDS = [
   {
@@ -64,6 +65,7 @@ export default function Home() {
     onSuccess: () => {
       setLeadSubmitted(true);
       toast.success("You're in! Check your email for the guide.");
+      track("email_signup", { source: "homepage_hero" });
     },
     onError: () => toast.error("Something went wrong. Please try again."),
   });
