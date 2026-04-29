@@ -45,6 +45,7 @@ function Router() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
+      <AffiliateDisclosure />
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/library" component={Library} />
@@ -74,7 +75,6 @@ function Router() {
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
-      <AffiliateDisclosure />
       <Footer />
       <PixelBuddy />
       <StackScoreWidget />
