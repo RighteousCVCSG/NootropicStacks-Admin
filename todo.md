@@ -38,3 +38,5 @@
 - [x] Write and run Vitest tests (11 tests, all passing)
 - [x] Zero TypeScript errors
 - [ ] Save final checkpoint
+
+<!-- deploy-verify: NOO-12 2026-04-29 -->
