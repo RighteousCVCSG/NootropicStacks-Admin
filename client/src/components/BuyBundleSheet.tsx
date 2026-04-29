@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { useQuickStack } from "@/contexts/QuickStackContext";
+import { buildAttributionReferrer } from "@/lib/utm";
 
 interface SuppCost {
   energy: number;
@@ -60,7 +61,7 @@ export default function BuyBundleSheet({ open, onOpenChange }: Props) {
       supplementSlug: slug,
       affiliatePartner: partner,
       destinationUrl: url,
-      referrer: "stack-widget",
+      referrer: buildAttributionReferrer("stack-widget"),
     });
     window.open(url, "_blank", "noopener,noreferrer");
   };

@@ -2,8 +2,10 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
+import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { captureUtmFromUrl } from "./lib/utm";
 import Home from "./pages/Home";
 import Library from "./pages/Library";
 import SupplementDetail from "./pages/SupplementDetail";
@@ -28,6 +30,7 @@ import ResearchLibrary from "./pages/ResearchLibrary";
 import CelebrityStacks from "./pages/CelebrityStacks";
 import Support from "./pages/Support";
 import StarterGuide from "./pages/StarterGuide";
+import Dashboard from "./pages/Dashboard";
 import Nav from "./components/Nav";
 import AffiliateDisclosure from "./components/AffiliateDisclosure";
 import Footer from "./components/Footer";
@@ -36,6 +39,9 @@ import StackScoreWidget from "./components/StackScoreWidget";
 import { QuickStackProvider } from "./contexts/QuickStackContext";
 
 function Router() {
+  useEffect(() => {
+    captureUtmFromUrl();
+  }, []);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
@@ -64,6 +70,7 @@ function Router() {
         <Route path="/celebrity-stacks" component={CelebrityStacks} />
         <Route path="/support" component={Support} />
         <Route path="/starter-guide" component={StarterGuide} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>

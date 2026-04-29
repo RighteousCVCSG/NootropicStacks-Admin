@@ -7,6 +7,7 @@ import { ShoppingCart, ExternalLink, Plus, Check } from "lucide-react";
 import type { Supplement } from "../../../drizzle/schema";
 import { useQuickStack } from "@/contexts/QuickStackContext";
 import { resolveBuyUrl } from "@/lib/affiliate-fallback";
+import { buildAttributionReferrer } from "@/lib/utm";
 
 interface Props {
   supplement: Supplement & { _score?: number };
@@ -47,6 +48,7 @@ export default function SupplementCard({ supplement: s, onAddToStack, showAddBut
       supplementId: s.id,
       affiliatePartner: partner,
       destinationUrl: url,
+      referrer: buildAttributionReferrer("supplement-card"),
     });
     window.open(url, "_blank", "noopener,noreferrer");
   };

@@ -11,8 +11,10 @@ import {
   emailLeads,
   affiliateClicks,
 } from "../drizzle/schema";
-import { eq, like, or, desc, and, inArray } from "drizzle-orm";
+import { eq, like, or, desc, and, inArray, sql, gte } from "drizzle-orm";
 import crypto from "crypto";
+
+const DASHBOARD_TOKEN = process.env.DASHBOARD_TOKEN || "";
 
 export const appRouter = router({
   system: systemRouter,
@@ -375,6 +377,91 @@ export const appRouter = router({
         .orderBy(desc(affiliateClicks.createdAt))
         .limit(500);
     }),
+
+    // Token-gated public summary so a small dashboard can be viewed without OAuth.
+    publicSummary: publicProcedure
+      .input(z.object({ key: z.string() }))
+      .query(async ({ input }) => {
+        if (!DASHBOARD_TOKEN || input.key !== DASHBOARD_TOKEN) {
+          throw new Error("Unauthorized");
+        }
+        const db = await getDb();
+        if (!db) {
+          return {
+            totals: { last24h: 0, last7d: 0, last30d: 0, allTime: 0 },
+            byPartner: [],
+            byReferrer: [],
+            byDay: [],
+            bySupplement: [],
+          };
+        }
+        const now = Date.now();
+        const d24 = new Date(now - 24 * 3600 * 1000);
+        const d7 = new Date(now - 7 * 24 * 3600 * 1000);
+        const d30 = new Date(now - 30 * 24 * 3600 * 1000);
+
+        const [allTime, last24h, last7d, last30d] = await Promise.all([
+          db.select({ c: sql<number>`count(*)` }).from(affiliateClicks),
+          db.select({ c: sql<number>`count(*)` }).from(affiliateClicks).where(gte(affiliateClicks.createdAt, d24)),
+          db.select({ c: sql<number>`count(*)` }).from(affiliateClicks).where(gte(affiliateClicks.createdAt, d7)),
+          db.select({ c: sql<number>`count(*)` }).from(affiliateClicks).where(gte(affiliateClicks.createdAt, d30)),
+        ]);
+
+        const byPartner = await db
+          .select({
+            partner: affiliateClicks.affiliatePartner,
+            count: sql<number>`count(*)`,
+          })
+          .from(affiliateClicks)
+          .where(gte(affiliateClicks.createdAt, d30))
+          .groupBy(affiliateClicks.affiliatePartner)
+          .orderBy(desc(sql`count(*)`));
+
+        const byReferrer = await db
+          .select({
+            referrer: affiliateClicks.referrer,
+            count: sql<number>`count(*)`,
+          })
+          .from(affiliateClicks)
+          .where(gte(affiliateClicks.createdAt, d30))
+          .groupBy(affiliateClicks.referrer)
+          .orderBy(desc(sql`count(*)`))
+          .limit(20);
+
+        const byDay = await db
+          .select({
+            day: sql<string>`date(${affiliateClicks.createdAt})`,
+            count: sql<number>`count(*)`,
+          })
+          .from(affiliateClicks)
+          .where(gte(affiliateClicks.createdAt, d30))
+          .groupBy(sql`date(${affiliateClicks.createdAt})`)
+          .orderBy(desc(sql`date(${affiliateClicks.createdAt})`));
+
+        const bySupplement = await db
+          .select({
+            slug: affiliateClicks.supplementSlug,
+            count: sql<number>`count(*)`,
+          })
+          .from(affiliateClicks)
+          .where(gte(affiliateClicks.createdAt, d30))
+          .groupBy(affiliateClicks.supplementSlug)
+          .orderBy(desc(sql`count(*)`))
+          .limit(20);
+
+        return {
+          totals: {
+            allTime: Number(allTime[0]?.c ?? 0),
+            last24h: Number(last24h[0]?.c ?? 0),
+            last7d: Number(last7d[0]?.c ?? 0),
+            last30d: Number(last30d[0]?.c ?? 0),
+          },
+          byPartner: byPartner.map((r) => ({ partner: r.partner, count: Number(r.count) })),
+          byReferrer: byReferrer.map((r) => ({ referrer: r.referrer ?? "(none)", count: Number(r.count) })),
+          byDay: byDay.map((r) => ({ day: r.day, count: Number(r.count) })),
+          bySupplement: bySupplement.map((r) => ({ slug: r.slug ?? "(none)", count: Number(r.count) })),
+        };
+      }),
   }),
 });
 
